@@ -1,0 +1,25 @@
+{
+	"name": "tread-code-challenge",
+	"version": "1.0.0",
+	"description": "Code challenge for Tread Front-End Engineer ",
+	"main": "server",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"start": "node server"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/tynose/tread-code-challenge.git"
+	},
+	"author": "Tyler Noseworthy",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/tynose/tread-code-challenge/issues"
+	},
+	"homepage": "https://github.com/tynose/tread-code-challenge#readme",
+	"dependencies": {
+		"body-parser": "^1.18.3",
+		"cors": "^2.8.5",
+		"express": "^4.16.4"
+	}
+}
