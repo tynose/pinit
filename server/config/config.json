@@ -2,7 +2,7 @@
 	"development": {
 		"username": "tylernoseworthy",
 		"password": null,
-		"database": "fetch",
+		"database": "tread",
 		"host": "127.0.0.1",
 		"dialect": "postgres",
 		"operatorsAliases": false
@@ -10,7 +10,7 @@
 	"test": {
 		"username": "tylernoseworthy",
 		"password": null,
-		"database": "fetch",
+		"database": "tread",
 		"host": "127.0.0.1",
 		"dialect": "postgres",
 		"operatorsAliases": false
@@ -18,7 +18,7 @@
 	"production": {
 		"username": "tylernoseworthy",
 		"password": null,
-		"database": "fetch",
+		"database": "tread",
 		"host": "127.0.0.1",
 		"dialect": "postgres",
 		"operatorsAliases": false
