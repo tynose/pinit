@@ -1,12 +1,13 @@
 const db = require('../models');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-
-const SECRET_KEY = process.env.SECRET_KEY || 'v0ei4dhfwjokb9s19qt6rt';
+require('dotenv').config();
 
 // get all users
 
 exports.users = function(req, res) {
+	console.log(process.env.SECRET_KEY);
+
 	db.User.findAll({})
 		.then(users => {
 			res.status(200).json(users);
@@ -16,24 +17,15 @@ exports.users = function(req, res) {
 
 // user sign up
 
-exports.userSignup = function(req, res, next) {
+exports.userSignup = function(req, res) {
+	let password = bcrypt.hashSync(req.body.password, 12);
+
 	db.User.create({
-		...req.body
+		...req.body,
+		password
 	})
-		.then(user => {
-			bcrypt.hash(user.password, 12, function(hash) {
-				user.password = hash;
-				user.save(err => {
-					if (err) {
-						return next(err);
-					}
-				});
-			});
-			res.status(201).json({ msg: 'a new user has been created' });
-		})
-		.catch(err => {
-			return res.status(500).json(err);
-		});
+		.then(() => res.status(201).json({ msg: 'a new user has been created' }))
+		.catch(err => res.status(500).json(err));
 };
 
 // user sign up
@@ -49,9 +41,10 @@ exports.userLogin = function(req, res) {
 		.then(user => {
 			bcrypt.compare(password, user.password, (err, result) => {
 				if (result) {
-					const token = jwt.sign({ subject: name }, SECRET_KEY);
+					const token = jwt.sign({ subject: name }, process.env.SECRET_KEY);
 					res.json({ token: token });
-				} else if (err) {
+				}
+				if (err) {
 					res.status(401).json({ msg: 'invalid credentials' });
 				}
 			});
@@ -63,7 +56,7 @@ exports.userLogin = function(req, res) {
 
 // user authorization  //
 
-exports.authorize = function(req, res) {
+exports.authorize = function(req, res, next) {
 	const { authorization } = req.headers;
 
 	const token = authorization.split('Bearer ')[1];
