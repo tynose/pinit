@@ -1,13 +1,13 @@
-import Login from '../../components/Login';
-import User from '../../components/User';
+import Home from '../../containers/Home';
+import User from '../../containers/User';
 
 // routes to be mapped out within App.js
 
 const Routes = [
 	{
-		id: 'Login',
-		path: '/login',
-		component: Login
+		id: 'home',
+		path: '/home',
+		component: Home
 	},
 	{
 		id: 'User',

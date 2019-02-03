@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
-export default class User extends Component {
+class User extends Component {
 	render() {
 		return (
 			<div>
@@ -9,3 +11,7 @@ export default class User extends Component {
 		);
 	}
 }
+
+User.propTypes = {};
+
+export default connect(null)(User);
