@@ -4,7 +4,7 @@ const PORT = process.env.PORT || 8080;
 const db = require('./config/database');
 const cors = require('cors');
 const path = require('path');
-const fetch = require('node-fetch');
+require('./config/passport');
 const bodyParser = require('body-parser');
 const user = require('./routes/user.routes');
 const auth = require('./routes/auth.routes');

@@ -1,4 +1,4 @@
-const db = require('../models');
+const passport = require('passport');
 require('dotenv').config();
 
 // auth login
@@ -14,9 +14,15 @@ exports.logOut = function(req, res) {
 	res.send('logging out');
 };
 
-// auto with github
+// auth with github
 
-exports.github = function(req, res) {
-	//handle with passport
-	res.send('logging in with github');
-};
+exports.github = passport.authenticate('github', {
+	scope: ['profile']
+});
+
+// callback routes for github
+
+(exports.callBack = passport.authenticate('github')),
+	(req, res) => {
+		res.send('you have reached the callback URI for github');
+	};
