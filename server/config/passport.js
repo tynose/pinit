@@ -4,14 +4,17 @@ const db = require('../models');
 require('dotenv').config();
 
 passport.serializeUser((user, done) => {
-	done(null, user.id);
+	console.log(user.user_id);
+
+	done(null, user.user_id);
 });
 
-passport.deserializeUser(async (id, done) => {
-	const user = await db.User.findOne({
+passport.deserializeUser((id, done) => {
+	db.User.findOne({
 		where: { id }
+	}).then(user => {
+		done(null, user);
 	});
-	done(null, user);
 });
 
 passport.use(

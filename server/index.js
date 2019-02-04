@@ -15,7 +15,7 @@ const user = require('./routes/user.routes');
 app.use(
 	cookieSession({
 		maxAge: 24 * 60 * 60 * 1000,
-		keys: [process.env.COOKIE_KEY]
+		keys: ['nfdlsnfslfng']
 	})
 );
 
@@ -25,12 +25,12 @@ require('dotenv').config();
 
 // serves static index.html from app root project folder in client
 
-app.use(express.static(path.resolve(__dirname, '../public/src/app')));
+// app.use(express.static(path.resolve(__dirname, '../client/build')));
 
 // setup middleware //
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
 
 // init passport
@@ -46,9 +46,9 @@ app.use('/user', user);
 
 // fallback route that servers static index.html page found in client root folder
 
-app.get('*', (req, res) => {
-	res.sendFile(path.resolve(__dirname, '../client/src/app', 'index.html'));
-});
+// app.get('*', (req, res) => {
+// 	res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
+// });
 
 // connection to database on localhost
 

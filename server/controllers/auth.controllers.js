@@ -24,4 +24,5 @@ exports.github = passport.authenticate('github', {
 
 exports.callBack = function(req, res) {
 	res.redirect('/user/');
+	// res.redirect(`/user/${req.user.name.toLowerCase().replace(/\s/g, '')}`);
 };
