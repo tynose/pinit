@@ -32,7 +32,6 @@ passport.use(
 			if (!githubUser) {
 				const newUser = await db.User.create({
 					name: displayName,
-					password: 'jdfjksdbfj',
 					email: _json.email
 				});
 				await db.GithubAuth.create({

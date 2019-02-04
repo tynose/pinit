@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
 	up: (queryInterface, Sequelize) => {
-		return queryInterface.createTable('Users', {
+		return queryInterface.createTable('LocalAuths', {
 			id: {
 				allowNull: false,
 				autoIncrement: true,
@@ -10,7 +10,7 @@ module.exports = {
 			},
 			name: {
 				allowNull: false,
-				unique: true,
+				unique: false,
 				type: Sequelize.STRING
 			},
 			password: {
@@ -21,6 +21,14 @@ module.exports = {
 				allowNull: false,
 				unique: true,
 				type: Sequelize.STRING
+			},
+			user_id: {
+				type: Sequelize.INTEGER,
+				onDelete: 'CASCADE',
+				references: {
+					model: 'Users',
+					key: 'id'
+				}
 			},
 			created_at: {
 				allowNull: false,
@@ -35,6 +43,6 @@ module.exports = {
 		});
 	},
 	down: (queryInterface, Sequelize) => {
-		return queryInterface.dropTable('Users');
+		return queryInterface.dropTable('LocalAuths');
 	}
 };
