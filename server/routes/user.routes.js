@@ -4,16 +4,6 @@ const userController = require('../controllers/user.controllers');
 
 // --- user routes -- //
 
-router.get('/', userController.users);
-
-router.get('/me', userController.authorize, userController.loggedInUser);
-
-router.post('/signup', userController.userSignup);
-
-router.post('/login', userController.userLogin);
-
-// router.put('/:id/update', userController.userUpdate);
-
-// router.delete('/:id/delete', userController.userDelete);
+router.get('/', userController.authorize, userController.loggedInUser);
 
 module.exports = router;
