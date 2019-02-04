@@ -11,6 +11,10 @@ router.get('/logout', authController.logOut);
 
 router.get('/github', authController.github);
 
-router.get('/github/callback', authController.callBack);
+router.get(
+	'/github/callback',
+	passport.authenticate('github'),
+	authController.callBack
+);
 
 module.exports = router;

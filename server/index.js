@@ -4,10 +4,19 @@ const PORT = process.env.PORT || 8080;
 const db = require('./config/database');
 const cors = require('cors');
 const path = require('path');
+const cookieSession = require('cookie-session');
+const passport = require('passport');
 require('./config/passport');
 const bodyParser = require('body-parser');
 const user = require('./routes/user.routes');
 const auth = require('./routes/auth.routes');
+
+app.use(
+	cookieSession({
+		maxAge: 24 * 60 * 60 * 1000,
+		keys: [process.env.COOKIE_KEY]
+	})
+);
 
 // requiring ENV //
 
@@ -22,6 +31,11 @@ app.use(express.static(path.resolve(__dirname, '../public/src/app')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
+
+// init passport
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 // app routes
 

@@ -22,7 +22,7 @@ exports.github = passport.authenticate('github', {
 
 // callback routes for github
 
-(exports.callBack = passport.authenticate('github')),
-	(req, res) => {
-		res.send('you have reached the callback URI for github');
-	};
+exports.callBack = function(req, res) {
+	// res.json(req.user);
+	res.redirect('/user/');
+};

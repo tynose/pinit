@@ -6,8 +6,6 @@ require('dotenv').config();
 // get all users
 
 exports.users = function(req, res) {
-	console.log(process.env.SECRET_KEY);
-
 	db.User.findAll({})
 		.then(users => {
 			res.status(200).json(users);
@@ -65,7 +63,7 @@ exports.authorize = function(req, res, next) {
 		return res.status(401).json({ msg: 'no token provided' });
 	}
 
-	const decoded = jwt.verify(token, SECRET_KEY);
+	const decoded = jwt.verify(token, process.env.SECRET_KEY);
 	console.log(decoded);
 
 	if (!decoded) {
