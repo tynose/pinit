@@ -1,16 +1,10 @@
 const passport = require('passport');
 require('dotenv').config();
 
-// auth login
-
-exports.login = function(req, res) {
-	res.send('logging in');
-};
-
 // auth logout
 
 exports.logOut = function(req, res) {
-	//handle with passport
+	req.logout();
 	res.send('logging out');
 };
 
