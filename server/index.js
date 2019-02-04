@@ -12,20 +12,18 @@ const localAuth = require('./routes/local-auth.routes');
 const auth = require('./routes/auth.routes');
 const user = require('./routes/user.routes');
 
-app.use(
-	cookieSession({
-		maxAge: 24 * 60 * 60 * 1000,
-		keys: ['nfdlsnfslfng']
-	})
-);
-
 // requiring ENV //
 
 require('dotenv').config();
 
-// serves static index.html from app root project folder in client
+// setup for cookie
 
-// app.use(express.static(path.resolve(__dirname, '../client/build')));
+app.use(
+	cookieSession({
+		maxAge: 24 * 60 * 60 * 1000,
+		keys: [`${process.env.COOKIE_KEY}`]
+	})
+);
 
 // setup middleware //
 
@@ -33,7 +31,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
 
-// init passport
+// init passport middleware
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -44,11 +42,15 @@ app.use('/localauth', localAuth);
 app.use('/auth', auth);
 app.use('/user', user);
 
-// fallback route that servers static index.html page found in client root folder
+if (process.env.NODE_ENV === 'production') {
+	// setup for static folder/files
 
-// app.get('*', (req, res) => {
-// 	res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
-// });
+	app.use(express.static(path.resolve(__dirname, '../client/build')));
+
+	app.get('*', (req, res) => {
+		res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
+	});
+}
 
 // connection to database on localhost
 

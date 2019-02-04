@@ -4,8 +4,6 @@ const db = require('../models');
 require('dotenv').config();
 
 passport.serializeUser((user, done) => {
-	console.log(user.user_id);
-
 	done(null, user.user_id);
 });
 
