@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
+import SignUp from '../../components/SignUp';
+import Login from '../../components/Login';
 import { flexCenter } from '../../utils/styles/mixin';
 
 const Container = styled.div`
@@ -17,10 +19,8 @@ class Home extends Component {
 	render() {
 		return (
 			<Container>
-				<h1>Home</h1>
-				<a href='https://github.com/login/oauth/authorize?client_id=myclientid123&redirect_uri=http://localhost:3000/callback'>
-					Login with github
-				</a>
+				{/* <SignUp /> */}
+				<Login />
 			</Container>
 		);
 	}

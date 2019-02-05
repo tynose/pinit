@@ -12,8 +12,8 @@ const Container = styled.div`
 	width: 100%;
 `;
 
-const Login = ({ errors, touched, isSubmitting }) => (
-	<HomePageForm label={'Login'}>
+const SignUp = ({ errors, touched, isSubmitting }) => (
+	<HomePageForm label={'Sign Up'} isSubmitting={isSubmitting}>
 		{inputs &&
 			inputs.map(({ type, name, placeholder, id }) => (
 				<Container key={id}>
@@ -26,10 +26,11 @@ const Login = ({ errors, touched, isSubmitting }) => (
 	</HomePageForm>
 );
 
-const FormikLogin = withFormik({
-	mapPropsToValues({ email, password }) {
+const FormikSignUp = withFormik({
+	mapPropsToValues({ email, name, password }) {
 		return {
 			email: email || '',
+			name: name || '',
 			password: password || ''
 		};
 	},
@@ -39,7 +40,8 @@ const FormikLogin = withFormik({
 			.required(),
 		password: Yup.string()
 			.min(5)
-			.required()
+			.required(),
+		name: Yup.string().required()
 	}),
 	handleSubmit(values, { resetForm, setErrors, setSubmitting }) {
 		setTimeout(() => {
@@ -52,6 +54,6 @@ const FormikLogin = withFormik({
 		}, 2000);
 		console.log(values);
 	}
-})(Login);
+})(SignUp);
 
-export default FormikLogin;
+export default FormikSignUp;
