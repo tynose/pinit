@@ -1,12 +1,13 @@
 import React from 'react';
-import Button from '../Button';
+// import { Link } from 'react-router-dom';
 import Icon from '../Icon';
 import styled from 'styled-components';
 
-const StyledButton = styled(Button)`
+const StyledButton = styled.a`
 	display: flex;
 	align-items: center;
 	justify-content: space-evenly;
+	width: 100%;
 	padding: 5px;
 	color: white;
 	background-color: ${props => props.theme.colors[props.icon]};
@@ -23,7 +24,7 @@ const Auth = styled.div`
 `;
 
 const OauthButton = ({ icon, className }) => (
-	<StyledButton icon={icon} className={className} form>
+	<StyledButton href='/auth/github' icon={icon} className={className} form>
 		<StyledIcon icon={icon} />
 		<Auth>{`Continue with ${`${icon[0].toUpperCase()}${icon.slice(1)}`}`}</Auth>
 	</StyledButton>
