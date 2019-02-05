@@ -23,7 +23,7 @@ class App extends Component {
 							render={() => <route.component data={route.data} />}
 						/>
 					))}
-					{/* <Redirect to={routes[0].path} /> */}
+					<Redirect to={routes[0].path} />
 				</Switch>
 			</Container>
 		);

@@ -32,7 +32,7 @@ class Home extends Component {
 		return (
 			<Container>
 				<Button onClick={this.handleClick} home>
-					{login ? 'Login' : 'Sign up'}
+					{login ? 'Sign up' : 'Login'}
 				</Button>
 				{login ? <Login /> : <SignUp />}
 			</Container>
