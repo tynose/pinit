@@ -9,7 +9,6 @@ export const GlobalStyles = createGlobalStyle`
     margin: 0;
     padding: 0;
     font-family: ${props => props.theme.fonts.fontFamily};
-    letter-spacing: 1px;
   }
 
   body {
@@ -25,7 +24,7 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   h3 {
-    font-size: 2rem;
+    font-size: 1.9rem;
   }
 
   h4 {
@@ -43,7 +42,13 @@ export const GlobalStyles = createGlobalStyle`
     border: none;
     font-size: 0.85rem;
     font-weight: 200;
-    color: ${props => props.theme.colors.blue};
+    height: 36px;
+    border-radius: 4px;
+    padding: 0px 18px;
+    font-size: 1.1rem;
+    margin: 10px 0;
+    vertical-align: middle;
+    text-align: center;
   }
 
   span {
