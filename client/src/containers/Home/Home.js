@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import SignUp from '../../components/SignUp';
 import Login from '../../components/Login';
+import Button from '../../components/Button';
 import { flexCenter } from '../../utils/styles/mixin';
 
 const Container = styled.div`
@@ -16,11 +17,24 @@ const Container = styled.div`
 `;
 
 class Home extends Component {
+	state = {
+		login: false
+	};
+
+	handleClick = () => {
+		this.setState(prevState => {
+			return { login: !prevState.login };
+		});
+	};
+
 	render() {
+		const { login } = this.state;
 		return (
 			<Container>
-				{/* <SignUp /> */}
-				<Login />
+				<Button onClick={this.handleClick} home>
+					{login ? 'Login' : 'Sign up'}
+				</Button>
+				{login ? <Login /> : <SignUp />}
 			</Container>
 		);
 	}

@@ -1,9 +1,9 @@
 import React from 'react';
-import FormButton from '../FormButton';
+import Button from '../Button';
 import Icon from '../Icon';
 import styled from 'styled-components';
 
-const Button = styled(FormButton)`
+const StyledButton = styled(Button)`
 	display: flex;
 	align-items: center;
 	justify-content: space-evenly;
@@ -22,11 +22,11 @@ const Auth = styled.div`
 	margin: 0 auto 0 34px;
 `;
 
-const OauthButton = ({ icon }) => (
-	<Button icon={icon}>
+const OauthButton = ({ icon, className }) => (
+	<StyledButton icon={icon} className={className} form>
 		<StyledIcon icon={icon} />
 		<Auth>{`Continue with ${`${icon[0].toUpperCase()}${icon.slice(1)}`}`}</Auth>
-	</Button>
+	</StyledButton>
 );
 
 export default OauthButton;

@@ -3,7 +3,7 @@ import { Form } from 'formik';
 import styled from 'styled-components';
 import Icon from '../Icon';
 import OauthButton from '../OauthButton';
-import FormButton from '../FormButton';
+import Button from '../Button';
 
 const StyledForm = styled(Form)`
 	background-color: #ffffff;
@@ -39,9 +39,9 @@ const HomePageForm = ({ children, label, isSubmitting }) => (
 			<h4>Access Pinterest's best ideas with a free account</h4>
 		</Container>
 		{children}
-		<FormButton disabled={isSubmitting}>
+		<Button disabled={isSubmitting} form>
 			{label === 'Login' ? 'Login' : 'Continue'}
-		</FormButton>
+		</Button>
 		<p>or</p>
 		<OauthButton icon={'github'} />
 	</StyledForm>
