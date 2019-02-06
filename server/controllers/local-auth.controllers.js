@@ -18,7 +18,6 @@ exports.users = function(req, res) {
 exports.userSignup = function(req, res) {
 	const { name, email } = req.body;
 	let password = bcrypt.hashSync(req.body.password, 12);
-
 	db.User.create({
 		name,
 		email

@@ -4,7 +4,7 @@ const initialState = {
 	user: []
 };
 
-export default function(state = initialState, action) {
+export default (state = initialState, action) => {
 	switch (action.type) {
 		case FETCH_USER:
 			return {
@@ -14,4 +14,4 @@ export default function(state = initialState, action) {
 		default:
 			return state;
 	}
-}
+};

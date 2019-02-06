@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components';
 const StyledButton = styled.button`
 	transform: opacity 1s ease;
 	${props =>
-		props.form &&
+		props.isForm &&
 		css`
 			width: 100%;
 			background-color: ${props => props.theme.colors.pinterest};

@@ -12,7 +12,7 @@ const Container = styled.div`
 	width: 100%;
 `;
 
-const Login = ({ errors, touched, isSubmitting }) => (
+const Login = ({ errors, touched }) => (
 	<HomePageForm label={'Login'}>
 		{inputs &&
 			inputs.map(({ type, name, placeholder, id }) => (
@@ -41,17 +41,7 @@ const FormikLogin = withFormik({
 			.min(5)
 			.required()
 	}),
-	handleSubmit(values, { resetForm, setErrors, setSubmitting }) {
-		setTimeout(() => {
-			if (values.email === 'tyler@test.io') {
-				setErrors({ email: 'A user with that email already exists' });
-			} else {
-				resetForm();
-			}
-			setSubmitting(false);
-		}, 2000);
-		console.log(values);
-	}
+	handleSubmit(values, { resetForm, setErrors, setSubmitting }) {}
 })(Login);
 
 export default FormikLogin;
