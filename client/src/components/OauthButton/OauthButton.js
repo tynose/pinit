@@ -23,7 +23,7 @@ const Auth = styled.div`
 `;
 
 const OauthButton = ({ icon, className }) => (
-	<StyledButton href='/auth/github' icon={icon} className={className}>
+	<StyledButton href={`/auth/${icon}`} icon={icon} className={className}>
 		<StyledIcon icon={icon} />
 		<Auth>{`Continue with ${`${icon[0].toUpperCase()}${icon.slice(1)}`}`}</Auth>
 	</StyledButton>

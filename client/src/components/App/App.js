@@ -20,7 +20,7 @@ class App extends Component {
 						<Route
 							key={route.id}
 							path={route.path}
-							render={() => <route.component data={route.data} />}
+							render={() => <route.component />}
 						/>
 					))}
 					<Redirect to={routes[0].path} />

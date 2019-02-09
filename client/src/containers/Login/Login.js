@@ -1,22 +1,21 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { withFormik } from 'formik';
-import HomePageForm from '../Forms/HomePageForm';
+import HomePageForm from '../../components/Forms/HomePageForm';
 import * as Yup from 'yup';
 import inputs from './inputs';
-import Input from '../Inputs/Input';
-import InputError from '../Inputs/InputError';
+import Input from '../../components/Inputs/Input';
+import InputError from '../../components/Inputs/InputError';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { signUpUser } from '../../actions/signup.actions';
+import { loginUser } from '../../actions/login.actions';
 
 const Container = styled.div`
 	position: relative;
 	width: 100%;
 `;
 
-const SignUp = ({ errors, touched, isSubmitting }) => (
-	<HomePageForm label={'Sign Up'} isSubmitting={isSubmitting}>
+const Login = ({ errors, touched, isSubmitting }) => (
+	<HomePageForm label={'Login'} isSubmitting={isSubmitting}>
 		{inputs &&
 			inputs.map(({ type, name, placeholder, id }) => (
 				<Container key={id}>
@@ -29,11 +28,10 @@ const SignUp = ({ errors, touched, isSubmitting }) => (
 	</HomePageForm>
 );
 
-const FormikSignUp = withFormik({
-	mapPropsToValues({ email, name, password }) {
+const FormikLogin = withFormik({
+	mapPropsToValues({ email, password }) {
 		return {
 			email: email || '',
-			name: name || '',
 			password: password || ''
 		};
 	},
@@ -43,20 +41,24 @@ const FormikSignUp = withFormik({
 			.required(),
 		password: Yup.string()
 			.min(5)
-			.required(),
-		name: Yup.string().required()
+			.required()
 	}),
-	handleSubmit(values, { props, resetForm, setErrors, setSubmitting }) {
-		props.signUpUser(values, resetForm, setErrors);
+	handleSubmit(values, { props, resetForm, setSubmitting }) {
+		props.loginUser(values);
+		resetForm();
 		setSubmitting(false);
 	}
-})(SignUp);
+})(Login);
 
-FormikSignUp.propTypes = {
-	signUpUser: PropTypes.func.isRequired
+const mapDispatchToProps = dispatch => {
+	return {
+		loginUser: values => {
+			dispatch(loginUser(values));
+		}
+	};
 };
 
 export default connect(
-	null,
-	{ signUpUser }
-)(FormikSignUp);
+	mapDispatchToProps,
+	{ loginUser }
+)(FormikLogin);

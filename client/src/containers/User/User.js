@@ -1,17 +1,33 @@
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { fetchUser } from '../../actions/user.actions';
 
 class User extends Component {
+	componentWillMount() {
+		this.props.fetchUser();
+	}
 	render() {
+		const { name, email } = this.props.user;
+
 		return (
 			<div>
-				<h1>User</h1>
+				<h1>{name}</h1>
+				<h1>{email}</h1>
 			</div>
 		);
 	}
 }
 
-User.propTypes = {};
+User.propTypes = {
+	fetchUser: PropTypes.func.isRequired
+};
 
-export default connect(null)(User);
+const mapStatetoProps = state => ({
+	user: state.user.user
+});
+
+export default connect(
+	mapStatetoProps,
+	{ fetchUser }
+)(User);

@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 // import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router';
 import styled from 'styled-components';
-import SignUp from '../../components/SignUp';
-import Login from '../../components/Login';
+import SignUp from '../SignUp';
+import Login from '../Login';
 import Button from '../../components/Button';
 import { flexCenter } from '../../utils/styles/mixin';
+import { homeToggle } from '../../actions/login.actions';
 
 const Container = styled.div`
 	width: 100vw;
@@ -17,24 +19,18 @@ const Container = styled.div`
 `;
 
 class Home extends Component {
-	state = {
-		login: false
-	};
-
-	handleClick = () => {
-		this.setState(prevState => {
-			return { login: !prevState.login };
-		});
-	};
-
 	render() {
-		const { login } = this.state;
+		const { login, homeToggle, isLoggedIn } = this.props;
+
+		console.log(this.props);
+
 		return (
 			<Container>
-				<Button onClick={this.handleClick} home>
+				<Button onClick={() => homeToggle(login)} home>
 					{login ? 'Sign up' : 'Login'}
 				</Button>
 				{login ? <Login /> : <SignUp />}
+				{isLoggedIn && <Redirect to='/user' />}
 			</Container>
 		);
 	}
@@ -42,4 +38,20 @@ class Home extends Component {
 
 Home.propTypes = {};
 
-export default connect(null)(Home);
+const mapStateToProps = state => ({
+	login: state.login.login,
+	isLoggedIn: state.login.isLoggedIn
+});
+
+const mapDispatchToProps = dispatch => {
+	return {
+		homeToggle: toggle => {
+			dispatch(homeToggle(toggle));
+		}
+	};
+};
+
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(Home);

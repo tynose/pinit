@@ -4,15 +4,11 @@ const db = require('../models');
 require('dotenv').config();
 
 passport.serializeUser((user, done) => {
-	done(null, user.user_id);
+	done(null, user);
 });
 
-passport.deserializeUser((id, done) => {
-	db.User.findOne({
-		where: { id }
-	}).then(user => {
-		done(null, user);
-	});
+passport.deserializeUser((user, done) => {
+	done(null, user);
 });
 
 passport.use(
@@ -25,24 +21,24 @@ passport.use(
 		},
 		async (accessToken, refreshToken, profile, done) => {
 			// callback for passport
-			const { id, displayName, _json } = profile;
-			const githubUser = await db.GithubAuth.findOne({
-				where: { github_id: id }
+			const { displayName, _json } = profile;
+			console.log(profile);
+
+			const user = await db.User.findOne({
+				where: {
+					name: displayName,
+					email: _json.email
+				}
 			});
 
-			if (!githubUser) {
+			if (!user) {
 				const newUser = await db.User.create({
 					name: displayName,
 					email: _json.email
 				});
-				await db.GithubAuth.create({
-					github_id: id,
-					name: displayName,
-					user_id: newUser.id
-				});
 				done(null, newUser);
 			} else {
-				done(null, githubUser);
+				done(null, user);
 			}
 		}
 	)
