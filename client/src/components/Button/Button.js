@@ -9,6 +9,9 @@ const StyledButton = styled.button`
 			width: 100%;
 			background-color: ${props => props.theme.colors.pinterest};
 			color: white;
+			padding: 0px 18px;
+			height: 36px;
+			margin: 10px 0;
 		`};
 	${props =>
 		props.home &&
@@ -16,6 +19,13 @@ const StyledButton = styled.button`
 			position: absolute;
 			top: 30px;
 			right: 50px;
+		`}
+	${props =>
+		props.nav &&
+		css`
+			position: absolute;
+			margin: 0 10px;
+			background-color: transparent;
 		`}
 	&:hover {
 		opacity: 0.9;

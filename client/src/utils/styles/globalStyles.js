@@ -42,11 +42,8 @@ export const GlobalStyles = createGlobalStyle`
     border: none;
     font-size: 0.85rem;
     font-weight: 200;
-    height: 36px;
     border-radius: 4px;
-    padding: 0px 18px;
     font-size: 1.1rem;
-    margin: 10px 0;
     vertical-align: middle;
     text-align: center;
   }
