@@ -20,39 +20,32 @@ exports.userSignup = function(req, res) {
 	let password = bcrypt.hashSync(req.body.password, 12);
 
 	db.User.findOrCreate({
-		where: {
-			name: name
-		},
-		defaults: {
-			name,
-			email
-		}
+		where: { name },
+		defaults: { name, email }
 	})
-		.then(user => {
-			if (user[1] === false) {
+		.spread((user, created) => {
+			if (!created) {
 				db.User.update(
 					{
-						email: email
+						email
 					},
-					{ where: { name: name } }
-				).then(() =>
-					db.LocalAuth.create({
-						name,
-						email,
-						password,
-						user_id: user[0].dataValues.id
-					})
+					{ where: { name } }
 				);
-				res.status(201).json({ msg: 'a new user has been created' });
 			}
+			db.LocalAuth.create({
+				name,
+				email,
+				password,
+				user_id: user.dataValues.id
+			});
 		})
+		.then(() => res.state(200).json({ msg: 'a new user has been created' }))
 		.catch(err => res.status(500).json(err));
 };
 
 // user sign up
 
 exports.userLogin = function(req, res) {
-	req.logout();
 	const { email, password } = req.body;
 
 	db.LocalAuth.findOne({

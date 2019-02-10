@@ -22,8 +22,6 @@ passport.use(
 		async (accessToken, refreshToken, profile, done) => {
 			// callback for passport
 			const { displayName, _json } = profile;
-			console.log(profile);
-
 			const user = await db.User.findOne({
 				where: {
 					name: displayName,

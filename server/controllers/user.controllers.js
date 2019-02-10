@@ -15,15 +15,15 @@ require('dotenv').config();
 // auth check
 
 exports.authorize = function(req, res, next) {
-	if (req.headers.authorization) {
-		const { authorization } = req.headers;
-
+	const { authorization } = req.headers;
+	if ((authorization !== 'Bearer null') | 'Bearer undefined') {
+		req.logout();
 		const token = authorization.split('Bearer ')[1];
 		if (!token) {
 			return res.status(401).json({ msg: 'no token provided' });
 		}
-
 		const decoded = jwt.verify(token, process.env.SECRET_KEY);
+
 		if (!decoded) {
 			return res.status(401).redirect('/home');
 		}
@@ -31,15 +31,16 @@ exports.authorize = function(req, res, next) {
 		next();
 	} else if (!req.user) {
 		res.redirect('/home');
-	} else {
-		next();
 	}
+	next();
 };
 
-// user sign up
+// user login up
 
 exports.loggedInUser = function(req, res) {
 	const { email, user } = req;
+	console.log(user);
+	console.log(email);
 
 	let body;
 	if (user) {
@@ -54,7 +55,7 @@ exports.loggedInUser = function(req, res) {
 		}
 	})
 		.then(user => {
-			res.status(200).json(user);
+			res.status(401).json(user);
 		})
-		.catch(err => res.status(500).json(err));
+		.catch(err => console.log(err));
 };

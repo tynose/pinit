@@ -25,6 +25,7 @@ export const signUpUser = (signUpData, formReset, setErrors) => dispatch => {
 			}
 		})
 		.catch(err => {
+			console.log('error');
 			throw new Error(err);
 		});
 };

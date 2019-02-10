@@ -22,8 +22,6 @@ class Home extends Component {
 	render() {
 		const { login, homeToggle, isLoggedIn } = this.props;
 
-		console.log(this.props);
-
 		return (
 			<Container>
 				<Button onClick={() => homeToggle(login)} home>

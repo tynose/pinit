@@ -44,6 +44,7 @@ const FormikLogin = withFormik({
 			.required()
 	}),
 	handleSubmit(values, { props, resetForm, setSubmitting }) {
+		localStorage.clear();
 		props.loginUser(values);
 		resetForm();
 		setSubmitting(false);
