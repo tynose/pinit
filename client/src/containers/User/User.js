@@ -2,16 +2,26 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fetchUser } from '../../actions/user.actions';
 import { fetchPhotos } from '../../actions/homePage.actions';
 import NavigationBar from '../NavigationBar';
 import { url } from '../../utils/constants/api';
 
-require('dotenv').config();
+const Container = styled.div`
+	height: 100vh;
+	width: 100%;
+	padding-top: 70px;
+	overflow-y: auto;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+`;
 
 const Image = styled.img`
-	width: 200px;
-	height: 200px;
+	width: 250px;
+	height: 250px;
+	padding: 10px;
+	display: flex;
+	object-fit: cover;
 `;
 
 class User extends Component {
@@ -31,13 +41,9 @@ class User extends Component {
 
 	render() {
 		const { photos } = this.props;
+
 		return (
-			<div
-				style={{
-					height: '100vh',
-					width: '100%',
-					overflowY: 'auto'
-				}}
+			<Container
 				onScroll={this.handleScroll}
 				ref={isScroll => {
 					this.isScroll = isScroll;
@@ -47,7 +53,7 @@ class User extends Component {
 					photos.map((image, index) => (
 						<Image key={index} src={`${image.src.small}`} alt='pexel' />
 					))}
-			</div>
+			</Container>
 		);
 	}
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import Icon from '../../components/Icon';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { connect } from 'react-redux';
 import SearchBar from '../../components/Forms/SearchBar';
 import { dropDownToggle } from '../../actions/ui.actions';
@@ -12,6 +12,7 @@ const Container = styled.nav`
 	padding: 10px 16px;
 	background-color: white;
 	position: fixed;
+	top: 0;
 	display: flex;
 	align-items: center;
 	border-bottom: 0.5px solid ${props => props.theme.colors.lightGray};
