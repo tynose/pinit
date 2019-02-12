@@ -1,8 +1,7 @@
-import { LOGIN_USER, HOME_TOGGLE } from '../actions/types';
+import { LOGIN_USER } from '../actions/types';
 
 const initialState = {
-	isLoggedIn: false,
-	login: false
+	isLoggedIn: false
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -11,11 +10,6 @@ export default (state = initialState, { type, payload }) => {
 			return {
 				...state,
 				isLoggedIn: payload
-			};
-		case HOME_TOGGLE:
-			return {
-				...state,
-				login: !payload
 			};
 		default:
 			return state;

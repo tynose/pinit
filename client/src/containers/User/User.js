@@ -3,37 +3,75 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchUser } from '../../actions/user.actions';
+import { fetchPhotos } from '../../actions/homePage.actions';
 import NavigationBar from '../NavigationBar';
+import { url } from '../../utils/constants/api';
 
-const Container = styled.div`
-	height: 100vh;
-	width: 100%;
+require('dotenv').config();
+
+const Image = styled.img`
+	width: 200px;
+	height: 200px;
 `;
 
 class User extends Component {
-	componentWillMount() {
-		// this.props.fetchUser();
+	componentDidMount() {
+		this.props.fetchPhotos(url('computers'));
 	}
-	render() {
-		const { name, email } = this.props.user;
 
+	handleScroll = () => {
+		if (
+			this.isScroll &&
+			this.isScroll.scrollTop + this.isScroll.clientHeight >=
+				this.isScroll.scrollHeight
+		) {
+			this.props.fetchPhotos(this.props.nextPage, this.props.fetching);
+		}
+	};
+
+	render() {
+		const { photos } = this.props;
 		return (
-			<Container>
+			<div
+				style={{
+					height: '100vh',
+					width: '100%',
+					overflowY: 'auto'
+				}}
+				onScroll={this.handleScroll}
+				ref={isScroll => {
+					this.isScroll = isScroll;
+				}}>
 				<NavigationBar />
-			</Container>
+				{photos &&
+					photos.map((image, index) => (
+						<Image key={index} src={`${image.src.small}`} alt='pexel' />
+					))}
+			</div>
 		);
 	}
 }
 
 User.propTypes = {
-	fetchUser: PropTypes.func.isRequired
+	fetchPhotos: PropTypes.func.isRequired
 };
 
 const mapStatetoProps = state => ({
-	user: state.user.user
+	fetching: state.homePage.fetching,
+	photos: state.homePage.photos,
+	nextPage: state.homePage.nextPage,
+	search: state.homePage.search
 });
+
+const mapDispatchToProps = dispatch => {
+	return {
+		fetchPhotos: (url, fetched) => {
+			dispatch(fetchPhotos(url, fetched));
+		}
+	};
+};
 
 export default connect(
 	mapStatetoProps,
-	{ fetchUser }
+	mapDispatchToProps
 )(User);

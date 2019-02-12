@@ -37,7 +37,7 @@ class Home extends Component {
 Home.propTypes = {};
 
 const mapStateToProps = state => ({
-	login: state.login.login,
+	login: state.ui.login,
 	isLoggedIn: state.login.isLoggedIn
 });
 

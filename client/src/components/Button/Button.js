@@ -1,8 +1,10 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
+import { flexCenter } from '../../utils/styles/mixin';
 
 const StyledButton = styled.button`
-	transform: opacity 1s ease;
+	transform: all 1s ease;
+	${flexCenter}
 	${props =>
 		props.isForm &&
 		css`
@@ -19,16 +21,27 @@ const StyledButton = styled.button`
 			position: absolute;
 			top: 30px;
 			right: 50px;
+			width: 120px;
+			padding: 10px;
 		`}
 	${props =>
-		props.nav &&
+		props.search &&
 		css`
 			position: absolute;
-			margin: 0 10px;
 			background-color: transparent;
+			margin: 0 10px;
 		`}
+		${props =>
+			props.nav &&
+			css`
+				border-radius: 50%;
+				padding: 10px;
+				&:hover {
+					background-color: ${props => props.theme.colors.lightGray};
+				}
+			`}
 	&:hover {
-		opacity: 0.9;
+		opacity: 0.8;
 	}
 `;
 

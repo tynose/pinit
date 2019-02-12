@@ -44,8 +44,8 @@ export const GlobalStyles = createGlobalStyle`
     font-weight: 200;
     border-radius: 4px;
     font-size: 1.1rem;
+    color: black;
     vertical-align: middle;
-    text-align: center;
   }
 
   span {
@@ -58,7 +58,7 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   ul, li, ol {
-    list-style-type: disc;
+    list-style-type: none;
     font-size: 1rem;
   }
 

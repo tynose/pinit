@@ -4,6 +4,8 @@ import Icon from '../../components/Icon';
 import styled from 'styled-components';
 import Button from '../../components/Button';
 import { connect } from 'react-redux';
+import { fetchPhotos } from '../../actions/homePage.actions';
+import { url } from '../../utils/constants/api';
 
 const StyledForm = styled(Form)`
 	width: 100%;
@@ -42,7 +44,7 @@ const StyledField = styled(Field)`
 const SearchBar = () => (
 	<StyledForm>
 		<InputWrapper>
-			<Button type='submit' aria-label='search' nav>
+			<Button type='submit' aria-label='search' search>
 				<StyledIcon icon={'search'} />
 			</Button>
 			<StyledField type='search' name='search' placeholder='Search' />
@@ -56,12 +58,22 @@ const FormikSearchBar = withFormik({
 			search: search || ''
 		};
 	},
-	handleSubmit(values, { resetForm, setSubmitting }) {
-		console.log(values);
-
+	handleSubmit(values, { props, resetForm, setSubmitting }) {
+		props.fetchPhotos(url(values.search));
 		resetForm();
 		setSubmitting(false);
 	}
 })(SearchBar);
 
-export default connect(null)(FormikSearchBar);
+const mapDispatchToProps = dispatch => {
+	return {
+		fetchPhotos: (url, value) => {
+			dispatch(fetchPhotos(url(value)));
+		}
+	};
+};
+
+export default connect(
+	mapDispatchToProps,
+	{ fetchPhotos }
+)(FormikSearchBar);
