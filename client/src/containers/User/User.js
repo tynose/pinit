@@ -42,6 +42,8 @@ class User extends Component {
 	render() {
 		const { photos } = this.props;
 
+		console.log(photos);
+
 		return (
 			<Container
 				onScroll={this.handleScroll}
@@ -50,8 +52,8 @@ class User extends Component {
 				}}>
 				<NavigationBar />
 				{photos &&
-					photos.map((image, index) => (
-						<Image key={index} src={`${image.src.small}`} alt='pexel' />
+					photos.map(image => (
+						<Image key={image.id} src={`${image.src.medium}`} alt='pexel' />
 					))}
 			</Container>
 		);
