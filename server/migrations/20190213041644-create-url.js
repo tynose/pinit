@@ -9,9 +9,13 @@ module.exports = {
 				type: Sequelize.INTEGER
 			},
 			href: {
+				allowNull: false,
+				unique: true,
 				type: Sequelize.STRING
 			},
 			url_code: {
+				allowNull: false,
+				unique: true,
 				type: Sequelize.STRING
 			},
 			created_at: {

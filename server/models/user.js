@@ -4,14 +4,18 @@ module.exports = (sequelize, DataTypes) => {
 		'User',
 		{
 			name: DataTypes.STRING,
-			email: DataTypes.STRING
+			email: DataTypes.STRING,
+			photos: DataTypes.STRING
 		},
 		{
 			underscored: true
 		}
 	);
 	User.associate = function(models) {
-		// associations can be defined here
+		User.hasMany(models.Link, {
+			foreignKey: 'user_id',
+			onDelete: 'CASCADE'
+		});
 	};
 	return User;
 };
