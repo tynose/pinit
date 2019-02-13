@@ -17,11 +17,6 @@ module.exports = {
 				unique: true,
 				type: Sequelize.STRING
 			},
-			photos: {
-				allowNull: true,
-				unique: true,
-				type: Sequelize.STRING
-			},
 			created_at: {
 				allowNull: false,
 				type: Sequelize.DATE,

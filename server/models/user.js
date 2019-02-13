@@ -4,8 +4,7 @@ module.exports = (sequelize, DataTypes) => {
 		'User',
 		{
 			name: DataTypes.STRING,
-			email: DataTypes.STRING,
-			photos: DataTypes.STRING
+			email: DataTypes.STRING
 		},
 		{
 			underscored: true

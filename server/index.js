@@ -40,15 +40,15 @@ app.use(passport.session());
 // app routes
 
 app.use('/localauth', localAuth);
-app.use('/url', url);
-app.use('/auth', auth);
 app.use('/user', user);
+app.use('/auth', auth);
+app.use('/url', url);
 
 // setup for static folder/files
 
 app.use(express.static(path.resolve(__dirname, '../client/build')));
 
-app.get('*', (req, res) => {
+app.get('/*', (req, res) => {
 	res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
 });
 

@@ -5,13 +5,13 @@ require('dotenv').config();
 
 // get all users
 
-exports.users = function(req, res) {
-	db.User.findAll()
-		.then(users => {
-			res.status(200).json(users);
-		})
-		.catch(err => res.status(500).json(err));
-};
+// exports.users = function(req, res) {
+// 	db.User.findAll()
+// 		.then(users => {
+// 			res.status(200).json(users);
+// 		})
+// 		.catch(err => res.status(500).json(err));
+// };
 
 // user sign up
 
@@ -22,28 +22,27 @@ exports.userSignup = function(req, res) {
 	db.User.findOrCreate({
 		where: { name },
 		defaults: { name, email }
-	})
-		.spread((user, created) => {
-			if (!created) {
-				db.User.update(
-					{
-						email
-					},
-					{ where: { name } }
-				);
-			}
-			db.LocalAuth.create({
-				name,
-				email,
-				password,
-				user_id: user.dataValues.id
-			});
+	}).spread((user, created) => {
+		if (!created) {
+			db.User.update(
+				{
+					email
+				},
+				{ where: { name } }
+			);
+		}
+		db.LocalAuth.create({
+			name,
+			email,
+			password,
+			user_id: user.dataValues.id
 		})
-		.then(() => res.state(200).json({ msg: 'a new user has been created' }))
-		.catch(err => res.status(500).json(err));
+			.then(() => res.state(201).json({ msg: 'a new user has been created' }))
+			.catch(err => res.json(err));
+	});
 };
 
-// user sign up
+// user login up
 
 exports.userLogin = function(req, res) {
 	const { email, password } = req.body;
@@ -65,6 +64,6 @@ exports.userLogin = function(req, res) {
 			});
 		})
 		.catch(err => {
-			res.status(500).json(err);
+			res.json(err);
 		});
 };

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchPhotos } from '../../actions/homePage.actions';
+import { fetchUser } from '../../actions/user.actions';
 import NavigationBar from '../NavigationBar';
 import { url } from '../../utils/constants/api';
 
@@ -27,6 +28,7 @@ const Image = styled.img`
 class User extends Component {
 	componentDidMount() {
 		this.props.fetchPhotos(url('computers'));
+		this.props.fetchUser();
 	}
 
 	handleScroll = () => {
@@ -41,6 +43,8 @@ class User extends Component {
 
 	render() {
 		const { photos } = this.props;
+
+		console.log(this.props);
 
 		console.log(photos);
 
@@ -68,13 +72,17 @@ const mapStatetoProps = state => ({
 	fetching: state.homePage.fetching,
 	photos: state.homePage.photos,
 	nextPage: state.homePage.nextPage,
-	search: state.homePage.search
+	search: state.homePage.search,
+	user: state.user.user
 });
 
 const mapDispatchToProps = dispatch => {
 	return {
 		fetchPhotos: (url, fetched) => {
 			dispatch(fetchPhotos(url, fetched));
+		},
+		fetchUser: () => {
+			dispatch(fetchUser());
 		}
 	};
 };

@@ -32,15 +32,12 @@ exports.authorize = function(req, res, next) {
 	} else if (!req.user) {
 		res.redirect('/home');
 	}
-	next();
 };
 
 // user login up
 
 exports.loggedInUser = function(req, res) {
 	const { email, user } = req;
-	console.log(user);
-	console.log(email);
 
 	let body;
 	if (user) {
@@ -52,10 +49,11 @@ exports.loggedInUser = function(req, res) {
 	db.User.findOne({
 		where: {
 			email: body
-		}
+		},
+		include: [{ model: db.Link }]
 	})
 		.then(user => {
-			res.status(401).json(user);
+			res.json(user);
 		})
-		.catch(err => console.log(err));
+		.catch(err => res.json(err));
 };

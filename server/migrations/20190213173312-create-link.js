@@ -9,7 +9,6 @@ module.exports = {
 				type: Sequelize.INTEGER
 			},
 			user_id: {
-				unique: true,
 				allowNull: false,
 				type: Sequelize.INTEGER,
 				onDelete: 'CASCADE',
