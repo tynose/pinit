@@ -4,7 +4,9 @@ module.exports = (sequelize, DataTypes) => {
 		'Link',
 		{
 			user_id: DataTypes.STRING,
-			photo_id: DataTypes.STRING
+			photo_id: DataTypes.STRING,
+			href: DataTypes.STRING,
+			url: DataTypes.STRING
 		},
 		{
 			underscored: true

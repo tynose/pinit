@@ -1,11 +1,8 @@
 import React from 'react';
 import Icon from '../../components/Icon';
 import styled from 'styled-components';
-import { connect } from 'react-redux';
 import SearchBar from '../../components/Forms/SearchBar';
-import { dropDownToggle } from '../../actions/ui.actions';
-import { fetchPhotos } from '../../actions/homePage.actions';
-import DropDown from '../../components/DropDown';
+import DropDown from '../UI/DropDown';
 
 const Container = styled.nav`
 	width: 100%;
@@ -13,6 +10,7 @@ const Container = styled.nav`
 	background-color: white;
 	position: fixed;
 	top: 0;
+	z-index: 10;
 	display: flex;
 	align-items: center;
 	border-bottom: 0.5px solid ${props => props.theme.colors.lightGray};
@@ -33,32 +31,14 @@ const StyledIcon = styled(Icon)`
 	margin: 0;
 `;
 
-const NavigationBar = ({ dropDownActive, dropDownToggle }) => (
+const NavigationBar = () => (
 	<Container>
-		<StyledLink href={'/home'}>
+		<StyledLink href={'/'}>
 			<StyledIcon icon={'pinterest'} />
 		</StyledLink>
 		<SearchBar />
-		<DropDown dropDownActive={dropDownActive} dropDownToggle={dropDownToggle} />
+		<DropDown />
 	</Container>
 );
 
-const mapStateToProps = state => ({
-	dropDownActive: state.ui.dropDownActive
-});
-
-const mapDispatchToProps = dispatch => {
-	return {
-		dropDownToggle: toggle => {
-			dispatch(dropDownToggle(toggle));
-		},
-		fetchPhotos: (url, fetched) => {
-			dispatch(fetchPhotos(url, fetched));
-		}
-	};
-};
-
-export default connect(
-	mapStateToProps,
-	mapDispatchToProps
-)(NavigationBar);
+export default NavigationBar;

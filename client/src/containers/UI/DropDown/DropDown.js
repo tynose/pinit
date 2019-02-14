@@ -1,7 +1,9 @@
 import React from 'react';
-import Icon from '../../components/Icon';
+import Icon from '../../../components/Icon';
 import styled from 'styled-components';
-import Button from '../../components/Button';
+import Button from '../../../components/Button';
+import { connect } from 'react-redux';
+import { dropDownToggle } from '../../../actions/ui.actions';
 
 const ListItem = styled.li`
 	z-index: 1;
@@ -52,39 +54,52 @@ const Menu = styled.ul`
 	}
 `;
 
-const DropDown = ({ children, dropDownToggle, dropDownActive }) => (
-	<li
-		onBlur={e => {
-			// if target doesnt include one of these nodes
-			// ref, or class... doesnt matter, but compare
-			// the target; and if not one of them
-			// dispatch dropDownToggle(false)
-			console.log(e.target.className);
-		}}>
+const DropDown = ({ children, dropDownToggle, dropDownActive, id }) => (
+	<ul>
 		<Button onClick={() => dropDownToggle(dropDownActive)} nav>
 			<StyledIcon icon={'dropdown'} />
 		</Button>
 		{dropDownActive && (
 			<Menu>
 				<ListItem>
-					<StyledLink className={'navLink'} href={`/user/tylernoseworthy`} drop>
+					<StyledLink href={`/${id}/`} drop>
 						View Profile
 					</StyledLink>
 				</ListItem>
 				<ListItem>
-					<StyledLink className={'navLink'} href='/home' drop>
+					<StyledLink className={'navLink'} href='/' drop>
 						Home
 					</StyledLink>
 				</ListItem>
 				<ListItem>
-					<StyledLink className={'navLink'} href='/auth/logout' drop>
+					<StyledLink
+						className={'navLink'}
+						href={'/auth/logout'}
+						onClick={() => localStorage.removeItem('token')}
+						drop>
 						Logout
 					</StyledLink>
 				</ListItem>
 				{children}
 			</Menu>
 		)}
-	</li>
+	</ul>
 );
 
-export default DropDown;
+const mapStateToProps = state => ({
+	id: state.user.user.id,
+	dropDownActive: state.ui.dropDownActive
+});
+
+const mapDispatchToProps = dispatch => {
+	return {
+		dropDownToggle: dropDownActive => {
+			dispatch(dropDownToggle(dropDownActive));
+		}
+	};
+};
+
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(DropDown);

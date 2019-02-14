@@ -3,16 +3,6 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
-// get all users
-
-// exports.users = function(req, res) {
-// 	db.User.findAll()
-// 		.then(users => {
-// 			res.status(200).json(users);
-// 		})
-// 		.catch(err => res.status(500).json(err));
-// };
-
 // user sign up
 
 exports.userSignup = function(req, res) {

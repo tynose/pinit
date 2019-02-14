@@ -2,7 +2,6 @@
 	"name": "client",
 	"version": "0.1.0",
 	"private": true,
-	"proxy": "http://localhost:8080",
 	"dependencies": {
 		"@babel/core": "7.1.6",
 		"@svgr/webpack": "2.4.1",
@@ -69,6 +68,7 @@
 		"build": "node scripts/build.js",
 		"test": "node scripts/test.js"
 	},
+	"proxy": "http://localhost:8080",
 	"eslintConfig": {
 		"extends": "react-app"
 	},

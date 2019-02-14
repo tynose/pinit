@@ -4,13 +4,20 @@ require('dotenv').config();
 
 // get all users
 
-// exports.users = function(req, res) {
-// 	db.User.findAll({})
-// 		.then(users => {
-// 			res.status(200).json(users);
-// 		})
-// 		.catch(err => res.status(500).json(err));
-// };
+exports.user = function(req, res) {
+	const { id } = req.params;
+
+	db.User.findOne({
+		where: {
+			id
+		},
+		include: [{ model: db.Link }]
+	})
+		.then(users => {
+			res.json(users);
+		})
+		.catch(err => res.json(err));
+};
 
 // auth check
 

@@ -1,7 +1,7 @@
 import { LOGIN_USER } from '../actions/types';
 
 const initialState = {
-	isLoggedIn: false
+	isLoggedIn: localStorage.getItem('token') === null ? false : true
 };
 
 export default (state = initialState, { type, payload }) => {

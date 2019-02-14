@@ -19,6 +19,7 @@ class App extends Component {
 					{routes.map(route => (
 						<Route
 							key={route.id}
+							exact
 							path={route.path}
 							render={() => <route.component />}
 						/>

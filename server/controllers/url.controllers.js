@@ -14,10 +14,11 @@ exports.encoder = function(req, res) {
 			.then(url => {
 				if (!url) {
 					db.Url.create({ href, url_code: shortid.generate() }).then(url =>
-						res.status(201).json(url)
+						res.status(201).json(`${host}/url/${url.url_code}`)
 					);
+				} else {
+					res.status(201).json(`${host}/url/${url.url_code}`);
 				}
-				res.status(201).json({ shortUrl: `${host}/url/${url.url_code}` });
 			})
 			.catch(err => res.status(500).json(err));
 	}

@@ -18,7 +18,7 @@ const Container = styled.div`
 	justify-content: center;
 `;
 
-class User extends Component {
+class LandingPage extends Component {
 	componentDidMount() {
 		this.props.fetchPhotos(url('computers'));
 		this.props.fetchUser();
@@ -45,25 +45,17 @@ class User extends Component {
 					this.isScroll = isScroll;
 				}}>
 				<NavigationBar />
-				{photos &&
-					photos.map(image => (
-						<LinkImage
-							key={image.id}
-							src={`${image.src.medium}`}
-							alt={image.photographer}
-							photographer={image.photographer}
-						/>
-					))}
+				{photos && photos.map(image => <LinkImage key={image.id} {...image} />)}
 			</Container>
 		);
 	}
 }
 
-User.propTypes = {
+LandingPage.propTypes = {
 	fetchPhotos: PropTypes.func.isRequired
 };
 
-const mapStatetoProps = state => ({
+const mapStateToProps = state => ({
 	fetching: state.homePage.fetching,
 	photos: state.homePage.photos,
 	nextPage: state.homePage.nextPage,
@@ -83,6 +75,6 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(
-	mapStatetoProps,
+	mapStateToProps,
 	mapDispatchToProps
-)(User);
+)(LandingPage);

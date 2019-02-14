@@ -56,7 +56,12 @@ FormikSignUp.propTypes = {
 	signUpUser: PropTypes.func.isRequired
 };
 
-export default connect(
-	null,
-	{ signUpUser }
-)(FormikSignUp);
+const mapDispatchToProps = dispatch => {
+	return {
+		signUpUser: (values, resetForm, setErrors) => {
+			dispatch(signUpUser(values, resetForm, setErrors));
+		}
+	};
+};
+
+export default connect(mapDispatchToProps)(FormikSignUp);

@@ -17,6 +17,14 @@ module.exports = {
 					key: 'id'
 				}
 			},
+			href: {
+				allowNull: false,
+				type: Sequelize.STRING
+			},
+			url: {
+				allowNull: false,
+				type: Sequelize.STRING
+			},
 			photo_id: {
 				unique: true,
 				allowNull: false,

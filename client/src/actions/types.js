@@ -19,3 +19,9 @@ export const DROPDOWN_TOGGLE = 'DROPDOWN_TOGGLE';
 
 export const FETCH_PHOTOS = 'FETCH_PHOTOS';
 export const PHOTOS_PAG = 'PHOTOS_PAG';
+
+// add link
+
+export const ADD_LINK = 'ADD_LINK';
+export const GET_LINK = 'GET_LINK';
+export const DELETE_LINK = 'DELETE_LINK';

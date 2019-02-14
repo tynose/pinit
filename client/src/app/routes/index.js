@@ -6,12 +6,12 @@ import User from '../../containers/User';
 const Routes = [
 	{
 		id: 'home',
-		path: '/home',
+		path: '/',
 		component: Home
 	},
 	{
-		id: 'User',
-		path: '/user',
+		id: 'user',
+		path: '/:id',
 		component: User
 	}
 ];
