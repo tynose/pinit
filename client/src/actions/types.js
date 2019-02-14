@@ -1,6 +1,7 @@
 // Get user
 
 export const FETCH_USER = 'FETCH_USER';
+export const FETCH_USER_ID = 'FETCH_USER_ID';
 
 // Sign up users
 

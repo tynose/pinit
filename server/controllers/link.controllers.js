@@ -17,6 +17,22 @@ exports.add = function(req, res) {
 	db.Link.create({
 		...req.body
 	})
-		.then(res => console.log(res))
+		.then(res => res.status(200).json(res))
 		.catch(err => res.json(err));
+};
+
+// delete link
+
+exports.deleteLink = function(req, res) {
+	const { id } = req.params;
+	db.Link.findOne({
+		where: {
+			id
+		}
+	})
+		.then(link => {
+			link.destroy();
+			res.status(200).json(link);
+		})
+		.catch(err => res.status(500).json(err));
 };

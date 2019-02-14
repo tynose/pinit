@@ -62,7 +62,7 @@ const DropDown = ({ children, dropDownToggle, dropDownActive, id }) => (
 		{dropDownActive && (
 			<Menu>
 				<ListItem>
-					<StyledLink href={`/${id}/`} drop>
+					<StyledLink href={`/${id}`} drop>
 						View Profile
 					</StyledLink>
 				</ListItem>

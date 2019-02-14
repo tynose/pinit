@@ -46,7 +46,7 @@ exports.userLogin = function(req, res) {
 			bcrypt.compare(password, user.password, (err, result) => {
 				if (result) {
 					const token = jwt.sign({ subject: email }, process.env.SECRET_KEY);
-					res.json({ token });
+					res.json({ token, user: user.id });
 				}
 				if (err) {
 					res.status(401).json({ msg: 'invalid credentials' });

@@ -6,13 +6,16 @@ import Button from '../../components/Button';
 import Icon from '../../components/Icon';
 import UrlShort from '../UI/UrlShort.js';
 import { connect } from 'react-redux';
-import { addLink } from '../../actions/links.actions';
+import { withRouter } from 'react-router-dom';
+import { addLink, deleteLink } from '../../actions/links.actions';
+import { fetchUserId } from '../../actions/user.actions';
 
 const Container = styled.figure`
 	position: relative;
 	background-color: transparent;
 	border-radius: 5px;
 	margin: 10px;
+	height: max-content;
 	&:hover {
 		background-color: ${props => props.theme.colors.blackOp};
 	}
@@ -29,7 +32,7 @@ const StyledButton = styled(Button)`
 	${props =>
 		props.pin &&
 		css`
-			width: 100px;
+			border-radius: 50%;
 			top: 10px;
 			right: 10px;
 		`};
@@ -43,7 +46,6 @@ const StyledButton = styled(Button)`
 	padding: 6px;
 	background-color: ${props => props.theme.colors.pinterest};
 	display: none;
-
 	${Container}:hover & {
 		display: flex;
 	}
@@ -56,23 +58,46 @@ const StyledIcon = styled(Icon)`
 
 class LinkImage extends Component {
 	render() {
-		const { url, user, src, id, addLink, className } = this.props;
+		const {
+			url,
+			href,
+			user,
+			id,
+			fetchUserId,
+			addLink,
+			deleteLink,
+			className,
+			match
+		} = this.props;
+
+		const active =
+			user.id == match.params.id ? true : '/' === match.url ? true : false;
+
+		const deleteActive = user.id == match.params.id;
 
 		return (
 			<Container>
-				<StyledButton
-					onClick={() =>
-						addLink({ url, href: src.medium, photo_id: id, user_id: user.id })
-					}
-					pin>
-					<StyledIcon icon={'pin'} />
-					Save
-				</StyledButton>
+				{active && (
+					<StyledButton
+						onClick={() =>
+							!deleteActive
+								? addLink({
+										url,
+										href,
+										photo_id: id,
+										user_id: user.id
+								  })
+								: (deleteLink(id), fetchUserId(match.params.id))
+						}
+						pin>
+						<StyledIcon icon={!deleteActive ? 'pin' : 'close'} />
+					</StyledButton>
+				)}
 				<StyledUrlShort className={className} url={url} />
 				<a href={url}>
 					<StyledButton link>{`${url.substring(12, 22)}...`}</StyledButton>
 				</a>
-				<Image src={src.medium} />
+				<Image src={href} />
 			</Container>
 		);
 	}
@@ -90,6 +115,12 @@ const mapDispatchToProps = dispatch => {
 	return {
 		addLink: data => {
 			dispatch(addLink(data));
+		},
+		deleteLink: id => {
+			dispatch(deleteLink(id));
+		},
+		fetchUserId: id => {
+			dispatch(fetchUserId(id));
 		}
 	};
 };
@@ -97,4 +128,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(LinkImage);
+)(withRouter(LinkImage));

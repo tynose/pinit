@@ -64,4 +64,7 @@ const mapDispatchToProps = dispatch => {
 	};
 };
 
-export default connect(mapDispatchToProps)(FormikSignUp);
+export default connect(
+	mapDispatchToProps,
+	{ signUpUser }
+)(FormikSignUp);

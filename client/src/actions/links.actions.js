@@ -22,8 +22,8 @@ export const addLink = data => dispatch => {
 		});
 };
 
-export const deleteLink = dispatch => {
-	fetch('/link/delete', {
+export const deleteLink = id => dispatch => {
+	fetch(`/link/delete/${id}`, {
 		method: 'DELETE',
 		headers: {
 			'content-type': 'application/json'

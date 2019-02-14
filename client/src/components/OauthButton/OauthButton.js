@@ -8,6 +8,7 @@ const StyledButton = styled.a`
 	justify-content: space-evenly;
 	width: 100%;
 	padding: 5px;
+	margin: 10px 0;
 	color: white;
 	background-color: ${props => props.theme.colors[props.icon]};
 `;

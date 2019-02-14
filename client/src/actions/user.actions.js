@@ -1,4 +1,4 @@
-import { FETCH_USER } from './types';
+import { FETCH_USER, FETCH_USER_ID } from './types';
 
 export const fetchUser = () => dispatch => {
 	fetch('/user/me', {
@@ -11,6 +11,20 @@ export const fetchUser = () => dispatch => {
 		.then(user => {
 			dispatch({
 				type: FETCH_USER,
+				payload: user
+			});
+		})
+		.catch(err => {
+			throw new Error(err);
+		});
+};
+
+export const fetchUserId = id => dispatch => {
+	fetch(`/user/${id}`)
+		.then(resp => resp.json())
+		.then(user => {
+			dispatch({
+				type: FETCH_USER_ID,
 				payload: user
 			});
 		})

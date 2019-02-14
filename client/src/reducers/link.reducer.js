@@ -1,4 +1,4 @@
-import { ADD_LINK, GET_LINK } from '../actions/types';
+import { ADD_LINK, DELETE_LINK } from '../actions/types';
 
 const initialState = {};
 
@@ -6,11 +6,13 @@ export default (state = initialState, { type, payload }) => {
 	switch (type) {
 		case ADD_LINK:
 			return {
-				...state
+				...state,
+				payload
 			};
-		case GET_LINK:
+		case DELETE_LINK:
 			return {
-				...state
+				...state,
+				payload
 			};
 		default:
 			return state;

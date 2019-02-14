@@ -6,6 +6,8 @@ const linkController = require('../controllers/link.controllers');
 
 router.get('/:id', linkController.getLinks);
 
+router.delete('/delete/:id', linkController.deleteLink);
+
 router.post('/add', linkController.add);
 
 module.exports = router;

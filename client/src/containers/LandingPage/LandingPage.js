@@ -36,8 +36,6 @@ class LandingPage extends Component {
 
 	render() {
 		const { photos } = this.props;
-		console.log(photos);
-
 		return (
 			<Container
 				onScroll={this.handleScroll}
@@ -45,7 +43,10 @@ class LandingPage extends Component {
 					this.isScroll = isScroll;
 				}}>
 				<NavigationBar />
-				{photos && photos.map(image => <LinkImage key={image.id} {...image} />)}
+				{photos &&
+					photos.map(image => (
+						<LinkImage key={image.id} href={image.src.medium} {...image} />
+					))}
 			</Container>
 		);
 	}

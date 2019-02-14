@@ -60,9 +60,7 @@ export default class UrlShort extends Component {
 		}));
 	};
 
-	getLink = url => {
-		console.log(url);
-
+	getUrl = url => {
 		fetch('/url/add', {
 			method: 'POST',
 			headers: {
@@ -92,7 +90,7 @@ export default class UrlShort extends Component {
 					className={className}
 					onClick={() => {
 						this.urlToggle();
-						this.getLink({ href: url });
+						this.getUrl({ href: url });
 					}}
 					short>
 					<StyledIcon icon={'share'} />

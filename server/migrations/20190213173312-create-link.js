@@ -26,7 +26,6 @@ module.exports = {
 				type: Sequelize.STRING
 			},
 			photo_id: {
-				unique: true,
 				allowNull: false,
 				type: Sequelize.STRING
 			},

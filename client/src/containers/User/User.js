@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fetchPhotos } from '../../actions/homePage.actions';
-import { fetchUser } from '../../actions/user.actions';
+import { fetchUser, fetchUserId } from '../../actions/user.actions';
 import NavigationBar from '../NavigationBar';
-import { url } from '../../utils/constants/api';
+import { withRouter } from 'react-router-dom';
 import LinkImage from '../LinkImage';
+import { flexCenter } from '../../utils/styles/mixin';
 
 const Container = styled.div`
 	height: 100vh;
@@ -18,71 +18,64 @@ const Container = styled.div`
 	justify-content: center;
 `;
 
+const Profile = styled.div`
+	width: 100%;
+	height: 200px;
+	flex-direction: column;
+	justify-content: space-evenly;
+	${flexCenter};
+`;
+
+const StyledLinkImage = styled(LinkImage)``;
+
 class User extends Component {
-	componentDidMount() {
-		this.props.fetchPhotos(url('computers'));
-		this.props.fetchUser();
+	async componentDidMount() {
+		await this.props.fetchUser();
+		this.props.fetchUserId(this.props.match.params.id);
 	}
 
-	handleScroll = () => {
-		if (
-			this.isScroll &&
-			this.isScroll.scrollTop + this.isScroll.clientHeight >=
-				this.isScroll.scrollHeight
-		) {
-			this.props.fetchPhotos(this.props.nextPage, this.props.fetching);
+	componentDidUpdate(prevProps) {
+		if (prevProps.profile !== this.props.profile) {
+			this.props.fetchUserId(this.props.match.params.id);
 		}
-	};
+	}
 
 	render() {
-		const { photos } = this.props;
-		console.log(photos);
+		const { profile } = this.props;
 
 		return (
-			<Container
-				onScroll={this.handleScroll}
-				ref={isScroll => {
-					this.isScroll = isScroll;
-				}}>
+			<Container>
 				<NavigationBar />
-				{photos &&
-					photos.map(image => (
-						<LinkImage
-							key={image.id}
-							src={`${image.src.medium}`}
-							alt={image.photographer}
-							photographer={image.photographer}
-						/>
+				<Profile>
+					<h1>{profile.name}</h1>
+					<p>photos i've linked to</p>
+				</Profile>
+				{profile.Links &&
+					profile.Links.map(image => (
+						<StyledLinkImage key={image.id} {...image} />
 					))}
 			</Container>
 		);
 	}
 }
 
-User.propTypes = {
-	fetchPhotos: PropTypes.func.isRequired
-};
+User.propTypes = {};
 
 const mapStatetoProps = state => ({
-	fetching: state.homePage.fetching,
-	photos: state.homePage.photos,
-	nextPage: state.homePage.nextPage,
-	search: state.homePage.search,
-	user: state.user.user
+	profile: state.user.profile
 });
 
 const mapDispatchToProps = dispatch => {
 	return {
-		fetchPhotos: (url, fetched) => {
-			dispatch(fetchPhotos(url, fetched));
-		},
 		fetchUser: () => {
 			dispatch(fetchUser());
+		},
+		fetchUserId: id => {
+			dispatch(fetchUserId(id));
 		}
 	};
 };
-
 export default connect(
 	mapStatetoProps,
 	mapDispatchToProps
-)(User);
+)(withRouter(User));
