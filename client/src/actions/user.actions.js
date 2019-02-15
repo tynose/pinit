@@ -9,6 +9,7 @@ export const fetchUser = () => dispatch => {
 	})
 		.then(resp => resp.json())
 		.then(user => {
+			localStorage.setItem('user', user.id);
 			dispatch({
 				type: FETCH_USER,
 				payload: user

@@ -54,7 +54,15 @@ const mapStateToProps = state => ({
 	isLoggedIn: state.login.isLoggedIn
 });
 
+const mapDispatchToProps = dispatch => {
+	return {
+		homeToggle: login => {
+			dispatch(homeToggle(login));
+		}
+	};
+};
+
 export default connect(
 	mapStateToProps,
-	{ homeToggle }
+	mapDispatchToProps
 )(Home);

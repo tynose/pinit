@@ -10,6 +10,7 @@ export const SIGNUP_USER = 'SIGNUP_USER';
 // Login users
 
 export const LOGIN_USER = 'LOGIN_USER';
+export const ISLOGGED_IN = 'ISLOGGED_IN';
 
 // UI
 

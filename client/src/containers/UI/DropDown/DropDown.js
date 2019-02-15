@@ -75,7 +75,7 @@ const DropDown = ({ children, dropDownToggle, dropDownActive, id }) => (
 					<StyledLink
 						className={'navLink'}
 						href={'/auth/logout'}
-						onClick={() => localStorage.removeItem('token')}
+						onClick={() => localStorage.clear()}
 						drop>
 						Logout
 					</StyledLink>

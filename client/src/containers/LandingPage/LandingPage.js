@@ -20,8 +20,10 @@ const Container = styled.div`
 
 class LandingPage extends Component {
 	componentDidMount() {
-		this.props.fetchPhotos(url('computers'));
 		this.props.fetchUser();
+		this.props.fetchPhotos(url('computers'));
+
+		// localStorage.setItem('user', this.props.user.name);
 	}
 
 	handleScroll = () => {
@@ -36,6 +38,9 @@ class LandingPage extends Component {
 
 	render() {
 		const { photos } = this.props;
+
+		console.log(this.props.user.id);
+
 		return (
 			<Container
 				onScroll={this.handleScroll}

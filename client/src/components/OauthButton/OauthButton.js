@@ -1,6 +1,8 @@
 import React from 'react';
 import Icon from '../Icon';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
+import { isLoggedIn } from '../../actions/login.actions';
 
 const StyledButton = styled.a`
 	display: flex;
@@ -23,15 +25,26 @@ const Auth = styled.div`
 	margin: 0 auto 0 34px;
 `;
 
-const OauthButton = ({ icon, className }) => (
+const OauthButton = ({ icon, className, isLoggedIn }) => (
 	<StyledButton
 		href={`/auth/${icon}`}
 		icon={icon}
 		className={className}
-		onClick={() => localStorage.clear()}>
+		onClick={() => {
+			localStorage.clear();
+			localStorage.setItem('log', true);
+		}}>
 		<StyledIcon icon={icon} />
 		<Auth>{`Continue with ${`${icon[0].toUpperCase()}${icon.slice(1)}`}`}</Auth>
 	</StyledButton>
 );
 
-export default OauthButton;
+const mapDispatchToProps = dispatch => {
+	return {
+		isLoggedIn: () => {
+			dispatch(isLoggedIn());
+		}
+	};
+};
+
+export default connect(mapDispatchToProps)(OauthButton);

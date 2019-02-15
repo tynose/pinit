@@ -32,12 +32,14 @@ exports.authorize = function(req, res, next) {
 		const decoded = jwt.verify(token, process.env.SECRET_KEY);
 
 		if (!decoded) {
-			return res.status(401).redirect('/home');
+			return res.status(401).redirect('/');
 		}
 		req.email = decoded;
 		next();
 	} else if (!req.user) {
-		res.redirect('/home');
+		res.redirect('/');
+	} else {
+		next();
 	}
 };
 

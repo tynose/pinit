@@ -1,7 +1,7 @@
-import { LOGIN_USER } from '../actions/types';
+import { LOGIN_USER, ISLOGGED_IN } from '../actions/types';
 
 const initialState = {
-	isLoggedIn: localStorage.getItem('token') === null ? false : true
+	isLoggedIn: localStorage.getItem('token' && 'log') === null ? false : true
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -9,7 +9,12 @@ export default (state = initialState, { type, payload }) => {
 		case LOGIN_USER:
 			return {
 				...state,
-				isLoggedIn: payload
+				isLoggedIn: true
+			};
+		case ISLOGGED_IN:
+			return {
+				...state,
+				isLoggedIn: true
 			};
 		default:
 			return state;

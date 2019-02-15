@@ -11,5 +11,4 @@ exports.logOut = function(req, res) {
 
 exports.callBack = function(req, res) {
 	res.redirect('/');
-	// res.redirect(`/user/${req.user.name.toLowerCase().replace(/\s/g, '')}`);
 };

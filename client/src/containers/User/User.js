@@ -26,8 +26,6 @@ const Profile = styled.div`
 	${flexCenter};
 `;
 
-const StyledLinkImage = styled(LinkImage)``;
-
 class User extends Component {
 	async componentDidMount() {
 		await this.props.fetchUser();
@@ -35,7 +33,7 @@ class User extends Component {
 	}
 
 	componentDidUpdate(prevProps) {
-		if (prevProps.profile !== this.props.profile) {
+		if (prevProps.profile.id !== this.props.profile.id) {
 			this.props.fetchUserId(this.props.match.params.id);
 		}
 	}
@@ -51,9 +49,7 @@ class User extends Component {
 					<p>photos i've linked to</p>
 				</Profile>
 				{profile.Links &&
-					profile.Links.map(image => (
-						<StyledLinkImage key={image.id} {...image} />
-					))}
+					profile.Links.map(image => <LinkImage key={image.id} {...image} />)}
 			</Container>
 		);
 	}
