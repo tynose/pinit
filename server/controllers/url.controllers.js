@@ -1,7 +1,6 @@
 const db = require('../models');
 const shortid = require('shortid');
-
-const host = 'localhost:8080';
+require('dotenv').config();
 
 // url encoder(shorten)
 
@@ -14,7 +13,7 @@ exports.encoder = function(req, res) {
 			.then(url => {
 				if (!url) {
 					db.Url.create({ href, url_code: shortid.generate() }).then(url =>
-						res.status(201).json(`${host}/url/${url.url_code}`)
+						res.status(201).json(`${process.env.HOST}/url/${url.url_code}`)
 					);
 				} else {
 					res.status(201).json(`${host}/url/${url.url_code}`);
