@@ -6,6 +6,8 @@ exports.getLinks = function(req, res) {
 	const { id } = req.params;
 	const { limit } = req.query;
 
+	console.log(limit);
+
 	db.Link.findAll({
 		where: {
 			user_id: id

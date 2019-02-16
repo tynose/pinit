@@ -20,7 +20,6 @@ const Container = styled.div`
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
-	margin-bottom: 50px;
 `;
 
 const Wrapper = styled.div`
@@ -37,18 +36,20 @@ class User extends Component {
 	async componentDidMount() {
 		await this.props.fetchUser();
 		this.props.fetchUserId(this.props.match.params.id);
-		this.props.fetchUserPhotos(this.props.match.params.id, 1);
+		this.props.fetchUserPhotos(this.props.match.params.id, 0);
 	}
 
 	handleScroll = () => {
 		if (
 			this.isScroll &&
 			this.isScroll.scrollTop + this.isScroll.clientHeight >=
-				this.isScroll.scrollHeight - 20
+				this.isScroll.scrollHeight - 1
 		) {
+			console.log('fetch');
+
 			this.props.fetchUserPhotos(
 				this.props.match.params.id,
-				10 + this.props.photos.length
+				this.props.photos.length + 11
 			);
 		}
 	};
