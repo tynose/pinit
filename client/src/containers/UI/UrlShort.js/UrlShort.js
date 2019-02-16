@@ -11,7 +11,7 @@ const Container = styled.div`
 	flex-direction: column;
 	border-radius: 5px;
 	bottom: -75px;
-	width: 200px;
+	width: auto;
 	background-color: white;
 	padding: 10px;
 	border: 0.5px solid rgb(239, 239, 239);
