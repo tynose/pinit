@@ -6,5 +6,6 @@ module.exports = new Sequelize(process.env.DATABASE_URL, {
 	protocol: 'postgres',
 	dialectOptions: {
 		ssl: true
-	}
+	},
+	operatorsAliases: Sequelize.Op
 });

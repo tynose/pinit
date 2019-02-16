@@ -43,7 +43,7 @@ class User extends Component {
 		if (
 			this.isScroll &&
 			this.isScroll.scrollTop + this.isScroll.clientHeight >=
-				this.isScroll.scrollHeight
+				this.isScroll.scrollHeight - 20
 		) {
 			this.props.fetchUserPhotos(
 				this.props.match.params.id,
