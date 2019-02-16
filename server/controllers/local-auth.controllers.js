@@ -3,39 +3,36 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
-// get all users
-
-exports.users = function(req, res) {
-	db.User.findAll({})
-		.then(users => {
-			res.status(200).json(users);
-		})
-		.catch(err => res.status(500).json(err));
-};
-
 // user sign up
 
 exports.userSignup = function(req, res) {
 	const { name, email } = req.body;
 	let password = bcrypt.hashSync(req.body.password, 12);
 
-	db.User.create({
-		name,
-		email
-	})
-		.then(user => {
-			db.LocalAuth.create({
-				name,
-				email,
-				password,
-				user_id: user.id
-			});
-			res.status(201).json({ msg: 'a new user has been created' });
+	db.User.findOrCreate({
+		where: { name },
+		defaults: { name, email }
+	}).spread((user, created) => {
+		if (!created) {
+			db.User.update(
+				{
+					email
+				},
+				{ where: { name } }
+			);
+		}
+		db.LocalAuth.create({
+			name,
+			email,
+			password,
+			user_id: user.dataValues.id
 		})
-		.catch(err => res.status(500).json(err));
+			.then(() => res.state(201).json({ msg: 'a new user has been created' }))
+			.catch(err => res.json(err));
+	});
 };
 
-// user sign up
+// user login up
 
 exports.userLogin = function(req, res) {
 	const { email, password } = req.body;
@@ -49,7 +46,7 @@ exports.userLogin = function(req, res) {
 			bcrypt.compare(password, user.password, (err, result) => {
 				if (result) {
 					const token = jwt.sign({ subject: email }, process.env.SECRET_KEY);
-					res.json({ token: token });
+					res.json({ token, user: user.id });
 				}
 				if (err) {
 					res.status(401).json({ msg: 'invalid credentials' });
@@ -57,44 +54,6 @@ exports.userLogin = function(req, res) {
 			});
 		})
 		.catch(err => {
-			res.status(500).json(err);
+			res.json(err);
 		});
-};
-
-// user authorization  //
-
-exports.authorize = function(req, res, next) {
-	const { authorization } = req.headers;
-
-	const token = authorization.split('Bearer ')[1];
-
-	if (!token) {
-		return res.status(401).json({ msg: 'no token provided' });
-	}
-
-	const decoded = jwt.verify(token, process.env.SECRET_KEY);
-	console.log(decoded);
-
-	if (!decoded) {
-		return res.status(401).json({ msg: 'invalid token' });
-	}
-
-	req.email = decoded;
-	next();
-};
-
-// get logged in user //
-
-exports.loggedInUser = function(req, res) {
-	const email = req.email.subject;
-
-	db.LocalAuth.findOne({
-		where: {
-			email
-		}
-	})
-		.then(user => {
-			res.status(200).json(user);
-		})
-		.catch(err => res.status(500).json(err));
 };

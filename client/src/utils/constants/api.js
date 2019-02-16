@@ -1,5 +1,5 @@
 // utils file for storing urls for api requests
 
-const url = {};
-
-export default url;
+export const url = query => {
+	return `https://api.pexels.com/v1/search?query=${query}+query&per_page=40&page=1`;
+};

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Icon from '../Icon';
 import styled from 'styled-components';
 
@@ -8,6 +9,7 @@ const StyledButton = styled.a`
 	justify-content: space-evenly;
 	width: 100%;
 	padding: 5px;
+	margin: 10px 0;
 	color: white;
 	background-color: ${props => props.theme.colors[props.icon]};
 `;
@@ -23,10 +25,20 @@ const Auth = styled.div`
 `;
 
 const OauthButton = ({ icon, className }) => (
-	<StyledButton href='/auth/github' icon={icon} className={className} form>
+	<StyledButton
+		href={`/auth/${icon}`}
+		icon={icon}
+		className={className}
+		onClick={() => {
+			localStorage.clear();
+			localStorage.setItem('log', true);
+		}}>
 		<StyledIcon icon={icon} />
 		<Auth>{`Continue with ${`${icon[0].toUpperCase()}${icon.slice(1)}`}`}</Auth>
 	</StyledButton>
 );
 
+OauthButton.propTypes = {
+	icon: PropTypes.string.isRequired
+};
 export default OauthButton;

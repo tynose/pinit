@@ -1,11 +1,14 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { withFormik } from 'formik';
-import HomePageForm from '../Forms/HomePageForm';
+import HomePageForm from '../../components/Forms/HomePageForm';
 import * as Yup from 'yup';
 import inputs from './inputs';
-import Input from '../Inputs/Input';
-import InputError from '../Inputs/InputError';
+import Input from '../../components/Inputs/Input';
+import InputError from '../../components/Inputs/InputError';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
+import { signUpUser } from '../../actions/signup.actions';
 
 const Container = styled.div`
 	position: relative;
@@ -43,17 +46,25 @@ const FormikSignUp = withFormik({
 			.required(),
 		name: Yup.string().required()
 	}),
-	handleSubmit(values, { resetForm, setErrors, setSubmitting }) {
-		setTimeout(() => {
-			if (values.email === 'tyler@test.io') {
-				setErrors({ email: 'A user with that email already exists' });
-			} else {
-				resetForm();
-			}
-			setSubmitting(false);
-		}, 2000);
-		console.log(values);
+	handleSubmit(values, { props, resetForm, setErrors, setSubmitting }) {
+		props.signUpUser(values, resetForm, setErrors);
+		setSubmitting(false);
 	}
 })(SignUp);
 
-export default FormikSignUp;
+FormikSignUp.propTypes = {
+	signUpUser: PropTypes.func.isRequired
+};
+
+const mapDispatchToProps = dispatch => {
+	return {
+		signUpUser: (values, resetForm, setErrors) => {
+			dispatch(signUpUser(values, resetForm, setErrors));
+		}
+	};
+};
+
+export default connect(
+	mapDispatchToProps,
+	{ signUpUser }
+)(FormikSignUp);

@@ -7,7 +7,12 @@ const authController = require('../controllers/auth.controllers');
 
 router.get('/logout', authController.logOut);
 
-router.get('/github', authController.github);
+router.get(
+	'/github',
+	passport.authenticate('github', {
+		scope: ['profile']
+	})
+);
 
 router.get(
 	'/github/callback',

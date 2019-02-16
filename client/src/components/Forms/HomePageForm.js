@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Form } from 'formik';
 import styled from 'styled-components';
 import Icon from '../Icon';
@@ -39,12 +40,16 @@ const HomePageForm = ({ children, label, isSubmitting }) => (
 			<h4>Access Pinterest's best ideas with a free account</h4>
 		</Container>
 		{children}
-		<Button disabled={isSubmitting} form>
+		<Button type='submit' disabled={isSubmitting} isForm>
 			{label === 'Login' ? 'Login' : 'Continue'}
 		</Button>
 		<p>or</p>
 		<OauthButton icon={'github'} />
 	</StyledForm>
 );
+
+HomePageForm.propTypes = {
+	label: PropTypes.string.isRequired
+};
 
 export default HomePageForm;

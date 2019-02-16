@@ -11,6 +11,8 @@ const bodyParser = require('body-parser');
 const localAuth = require('./routes/local-auth.routes');
 const auth = require('./routes/auth.routes');
 const user = require('./routes/user.routes');
+const url = require('./routes/url.routes');
+const link = require('./routes/link.routes');
 
 // requiring ENV //
 
@@ -39,8 +41,10 @@ app.use(passport.session());
 // app routes
 
 app.use('/localauth', localAuth);
-app.use('/auth', auth);
 app.use('/user', user);
+app.use('/auth', auth);
+app.use('/url', url);
+app.use('/link', link);
 
 // setup for static folder/files
 

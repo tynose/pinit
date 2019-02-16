@@ -3,9 +3,3 @@ export const flexCenter = () => `
   justify-content: center;
   align-items: center;
 `;
-
-
-
-
-
-  

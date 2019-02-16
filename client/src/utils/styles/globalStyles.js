@@ -42,13 +42,10 @@ export const GlobalStyles = createGlobalStyle`
     border: none;
     font-size: 0.85rem;
     font-weight: 200;
-    height: 36px;
     border-radius: 4px;
-    padding: 0px 18px;
     font-size: 1.1rem;
-    margin: 10px 0;
+    color: black;
     vertical-align: middle;
-    text-align: center;
   }
 
   span {
@@ -61,7 +58,7 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   ul, li, ol {
-    list-style-type: disc;
+    list-style-type: none;
     font-size: 1rem;
   }
 

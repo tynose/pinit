@@ -1,11 +1,14 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { withFormik } from 'formik';
-import HomePageForm from '../Forms/HomePageForm';
+import HomePageForm from '../../components/Forms/HomePageForm';
 import * as Yup from 'yup';
 import inputs from './inputs';
-import Input from '../Inputs/Input';
-import InputError from '../Inputs/InputError';
+import Input from '../../components/Inputs/Input';
+import InputError from '../../components/Inputs/InputError';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
+import { loginUser } from '../../actions/login.actions';
 
 const Container = styled.div`
 	position: relative;
@@ -13,7 +16,7 @@ const Container = styled.div`
 `;
 
 const Login = ({ errors, touched, isSubmitting }) => (
-	<HomePageForm label={'Login'}>
+	<HomePageForm label={'Login'} isSubmitting={isSubmitting}>
 		{inputs &&
 			inputs.map(({ type, name, placeholder, id }) => (
 				<Container key={id}>
@@ -41,17 +44,28 @@ const FormikLogin = withFormik({
 			.min(5)
 			.required()
 	}),
-	handleSubmit(values, { resetForm, setErrors, setSubmitting }) {
-		setTimeout(() => {
-			if (values.email === 'tyler@test.io') {
-				setErrors({ email: 'A user with that email already exists' });
-			} else {
-				resetForm();
-			}
-			setSubmitting(false);
-		}, 2000);
-		console.log(values);
+	handleSubmit(values, { props, resetForm, setSubmitting }) {
+		localStorage.clear();
+		localStorage.setItem('log', true);
+		props.loginUser(values);
+		resetForm();
+		setSubmitting(false);
 	}
 })(Login);
 
-export default FormikLogin;
+FormikLogin.propTypes = {
+	loginUser: PropTypes.func.isRequired
+};
+
+const mapDispatchToProps = dispatch => {
+	return {
+		loginUser: values => {
+			dispatch(loginUser(values));
+		}
+	};
+};
+
+export default connect(
+	mapDispatchToProps,
+	{ loginUser }
+)(FormikLogin);

@@ -1,30 +1,22 @@
 'use strict';
 module.exports = {
 	up: (queryInterface, Sequelize) => {
-		return queryInterface.createTable('GithubAuths', {
+		return queryInterface.createTable('Urls', {
 			id: {
 				allowNull: false,
 				autoIncrement: true,
 				primaryKey: true,
 				type: Sequelize.INTEGER
 			},
-			name: {
-				allowNull: false,
-				unique: false,
-				type: Sequelize.STRING
-			},
-			github_id: {
+			href: {
 				allowNull: false,
 				unique: true,
 				type: Sequelize.STRING
 			},
-			user_id: {
-				type: Sequelize.INTEGER,
-				onDelete: 'CASCADE',
-				references: {
-					model: 'Users',
-					key: 'id'
-				}
+			url_code: {
+				allowNull: false,
+				unique: true,
+				type: Sequelize.STRING
 			},
 			created_at: {
 				allowNull: false,
@@ -39,6 +31,6 @@ module.exports = {
 		});
 	},
 	down: (queryInterface, Sequelize) => {
-		return queryInterface.dropTable('GithubAuths');
+		return queryInterface.dropTable('Urls');
 	}
 };
