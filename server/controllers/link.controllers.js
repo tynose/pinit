@@ -4,11 +4,19 @@ const db = require('../models');
 
 exports.getLinks = function(req, res) {
 	const { id } = req.params;
+	const { limit } = req.query;
+
 	db.Link.findAll({
 		where: {
-			id
-		}
-	});
+			user_id: id
+		},
+		offset: limit,
+		limit: 10
+	})
+		.then(photos => {
+			res.json(photos);
+		})
+		.catch(err => res.json(err));
 };
 
 // add link associated to user id

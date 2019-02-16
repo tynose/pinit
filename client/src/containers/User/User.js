@@ -2,7 +2,11 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fetchUser, fetchUserId } from '../../actions/user.actions';
+import {
+	fetchUser,
+	fetchUserId,
+	fetchUserPhotos
+} from '../../actions/user.actions';
 import NavigationBar from '../NavigationBar';
 import { withRouter } from 'react-router-dom';
 import LinkImage from '../LinkImage';
@@ -30,26 +34,50 @@ class User extends Component {
 	async componentDidMount() {
 		await this.props.fetchUser();
 		this.props.fetchUserId(this.props.match.params.id);
+		this.props.fetchUserPhotos(this.props.match.params.id, 10);
 	}
 
-	componentDidUpdate(prevProps) {
-		if (prevProps.profile.id !== this.props.profile.id) {
-			this.props.fetchUserId(this.props.match.params.id);
+	// componentDidUpdate(prevProps) {
+	// 	console.log(this.props.photos.length);
+	// 	console.log(prevProps.photos.length);
+
+	// 	if (this.props.photos.length !== prevProps.photos.length) {
+	// 		this.props.fetchUserPhotos(
+	// 			this.props.match.params.id,
+	// 			this.props.photos.length - 1
+	// 		);
+	// 		console.log('different');
+	// 	}
+	// }
+
+	handleScroll = () => {
+		if (
+			this.isScroll &&
+			this.isScroll.scrollTop + this.isScroll.clientHeight >=
+				this.isScroll.scrollHeight
+		) {
+			this.props.fetchUserPhotos(
+				this.props.match.params.id,
+				10 + this.props.photos.length
+			);
 		}
-	}
+	};
 
 	render() {
-		const { profile } = this.props;
+		const { profile, photos } = this.props;
 
 		return (
-			<Container>
+			<Container
+				onScroll={this.handleScroll}
+				ref={isScroll => {
+					this.isScroll = isScroll;
+				}}>
 				<NavigationBar />
 				<Profile>
 					<h1>{profile.name}</h1>
 					<p>photos i've linked to</p>
 				</Profile>
-				{profile.Links &&
-					profile.Links.map(image => <LinkImage key={image.id} {...image} />)}
+				{photos && photos.map(image => <LinkImage key={image.id} {...image} />)}
 			</Container>
 		);
 	}
@@ -58,7 +86,8 @@ class User extends Component {
 User.propTypes = {};
 
 const mapStatetoProps = state => ({
-	profile: state.user.profile
+	profile: state.user.profile,
+	photos: state.user.photos
 });
 
 const mapDispatchToProps = dispatch => {
@@ -68,6 +97,9 @@ const mapDispatchToProps = dispatch => {
 		},
 		fetchUserId: id => {
 			dispatch(fetchUserId(id));
+		},
+		fetchUserPhotos: (id, limit) => {
+			dispatch(fetchUserPhotos(id, limit));
 		}
 	};
 };

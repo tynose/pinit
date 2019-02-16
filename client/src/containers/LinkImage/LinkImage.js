@@ -8,7 +8,7 @@ import UrlShort from '../UI/UrlShort.js';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { addLink, deleteLink } from '../../actions/links.actions';
-import { fetchUserId } from '../../actions/user.actions';
+import { deletePhoto } from '../../actions/user.actions';
 
 const Container = styled.figure`
 	position: relative;
@@ -63,9 +63,10 @@ class LinkImage extends Component {
 			href,
 			user,
 			id,
-			fetchUserId,
 			addLink,
 			deleteLink,
+			deletePhoto,
+			photos,
 			className,
 			match
 		} = this.props;
@@ -87,7 +88,7 @@ class LinkImage extends Component {
 										photo_id: id,
 										user_id: user.id
 								  })
-								: (deleteLink(id), fetchUserId(match.params.id))
+								: (deleteLink(id), deletePhoto(id, photos))
 						}
 						pin>
 						<StyledIcon icon={!deleteActive ? 'pin' : 'close'} />
@@ -108,7 +109,8 @@ LinkImage.propTypes = {
 };
 
 const mapStateToProps = state => ({
-	user: state.user.user
+	user: state.user.user,
+	photos: state.user.photos
 });
 
 const mapDispatchToProps = dispatch => {
@@ -119,8 +121,8 @@ const mapDispatchToProps = dispatch => {
 		deleteLink: id => {
 			dispatch(deleteLink(id));
 		},
-		fetchUserId: id => {
-			dispatch(fetchUserId(id));
+		deletePhoto: (id, photos) => {
+			dispatch(deletePhoto(id, photos));
 		}
 	};
 };

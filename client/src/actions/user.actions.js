@@ -1,4 +1,9 @@
-import { FETCH_USER, FETCH_USER_ID } from './types';
+import {
+	FETCH_USER,
+	FETCH_USER_ID,
+	FETCH_USER_PHOTOS,
+	DELETE_PHOTO
+} from './types';
 
 export const fetchUser = () => dispatch => {
 	fetch('/user/me', {
@@ -32,4 +37,27 @@ export const fetchUserId = id => dispatch => {
 		.catch(err => {
 			throw new Error(err);
 		});
+};
+
+export const fetchUserPhotos = (id, limit) => dispatch => {
+	fetch(`/link/${id}?limit=${limit}`)
+		.then(resp => resp.json())
+		.then(photos => {
+			dispatch({
+				type: FETCH_USER_PHOTOS,
+				payload: photos
+			});
+		})
+		.catch(err => {
+			throw new Error(err);
+		});
+};
+
+export const deletePhoto = (id, photos) => dispatch => {
+	console.log({ photos, id });
+
+	dispatch({
+		type: DELETE_PHOTO,
+		payload: photos.filter(photo => photo.id !== id)
+	});
 };

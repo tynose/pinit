@@ -2,6 +2,8 @@
 
 export const FETCH_USER = 'FETCH_USER';
 export const FETCH_USER_ID = 'FETCH_USER_ID';
+export const FETCH_USER_PHOTOS = 'FETCH_USER_PHOTOS';
+export const DELETE_PHOTO = 'DELETE_PHOTO';
 
 // Sign up users
 

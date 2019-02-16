@@ -22,7 +22,7 @@ export const addLink = data => dispatch => {
 		});
 };
 
-export const deleteLink = id => dispatch => {
+export const deleteLink = (id, index) => dispatch => {
 	fetch(`/link/delete/${id}`, {
 		method: 'DELETE',
 		headers: {
@@ -30,10 +30,10 @@ export const deleteLink = id => dispatch => {
 		}
 	})
 		.then(resp => resp.json())
-		.then(link => {
+		.then(() => {
 			dispatch({
 				type: DELETE_LINK,
-				payload: link
+				payload: index
 			});
 		})
 		.catch(err => {
