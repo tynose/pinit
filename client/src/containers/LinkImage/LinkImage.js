@@ -94,7 +94,7 @@ class LinkImage extends Component {
 						<StyledIcon icon={!deleteActive ? 'pin' : 'close'} />
 					</StyledButton>
 				)}
-				<StyledUrlShort className={className} url={url} />
+				{url && <StyledUrlShort className={className} url={url} />}
 				<a href={url}>
 					<StyledButton link>{`${url.substring(12, 22)}...`}</StyledButton>
 				</a>

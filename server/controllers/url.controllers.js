@@ -6,6 +6,9 @@ require('dotenv').config();
 
 exports.encoder = function(req, res) {
 	const { href } = req.body;
+
+	console.log(href);
+
 	if (href) {
 		db.Url.findOne({
 			where: { href }
@@ -16,7 +19,7 @@ exports.encoder = function(req, res) {
 						res.status(201).json(`${process.env.HOST}/url/${url.url_code}`)
 					);
 				} else {
-					res.status(201).json(`${host}/url/${url.url_code}`);
+					res.status(201).json(`${process.env.HOST}/url/${url.url_code}`);
 				}
 			})
 			.catch(err => res.status(500).json(err));
