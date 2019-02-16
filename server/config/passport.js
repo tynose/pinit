@@ -17,7 +17,7 @@ passport.use(
 			// setup options for strategy
 			clientID: process.env.CLIENT_ID,
 			clientSecret: process.env.CLIENT_SECRET,
-			callbackURL: '/auth/github/callback'
+			callbackURL: `${process.env.HOST}/auth/github/callback`
 		},
 		async (accessToken, refreshToken, profile, done) => {
 			// callback for passport
