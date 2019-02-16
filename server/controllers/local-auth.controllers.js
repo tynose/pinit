@@ -6,9 +6,10 @@ require('dotenv').config();
 // user sign up
 
 exports.userSignup = function(req, res) {
-	const { name, email } = req.body;
+	const { name } = req.body;
 	let password = bcrypt.hashSync(req.body.password, 12);
-	email.toLowerCase();
+
+	let email = req.body.email.toLowerCase();
 
 	db.User.findOrCreate({
 		where: { name },
@@ -36,8 +37,9 @@ exports.userSignup = function(req, res) {
 // user login up
 
 exports.userLogin = function(req, res) {
-	const { email, password } = req.body;
-	email.toLowerCase();
+	const { password } = req.body;
+
+	let email = req.body.email.toLowerCase();
 
 	db.LocalAuth.findOne({
 		where: {
