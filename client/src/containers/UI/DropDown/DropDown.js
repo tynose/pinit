@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Icon from '../../../components/Icon';
 import styled from 'styled-components';
 import Button from '../../../components/Button';
@@ -85,6 +86,12 @@ const DropDown = ({ children, dropDownToggle, dropDownActive, id }) => (
 		)}
 	</ul>
 );
+
+DropDown.propTypes = {
+	dropDownToggle: PropTypes.func.isRequired,
+	id: PropTypes.number,
+	dropDownActive: PropTypes.bool
+};
 
 const mapStateToProps = state => ({
 	id: state.user.user.id,

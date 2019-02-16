@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Icon from '../../../components/Icon';
 import styled from 'styled-components';
 import Button from '../../../components/Button';
@@ -105,3 +106,8 @@ export default class UrlShort extends Component {
 		);
 	}
 }
+
+UrlShort.propTypes = {
+	className: PropTypes.string,
+	url: PropTypes.string
+};

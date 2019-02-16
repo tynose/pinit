@@ -2,7 +2,7 @@ import React from 'react';
 import Icon from '../../components/Icon';
 import styled from 'styled-components';
 import SearchBar from '../../components/Forms/SearchBar';
-import DropDown from '../UI/DropDown';
+import DropDown from '../../containers/UI/DropDown';
 
 const Container = styled.nav`
 	width: 100%;

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { withFormik } from 'formik';
 import HomePageForm from '../../components/Forms/HomePageForm';
 import * as Yup from 'yup';
@@ -51,6 +52,10 @@ const FormikLogin = withFormik({
 		setSubmitting(false);
 	}
 })(Login);
+
+FormikLogin.propTypes = {
+	loginUser: PropTypes.func.isRequired
+};
 
 const mapDispatchToProps = dispatch => {
 	return {

@@ -58,8 +58,7 @@ exports.loggedInUser = function(req, res) {
 	db.User.findOne({
 		where: {
 			email: body
-		},
-		include: [{ model: db.Link }]
+		}
 	})
 		.then(user => {
 			res.json(user);

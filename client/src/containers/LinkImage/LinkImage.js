@@ -105,7 +105,19 @@ class LinkImage extends Component {
 }
 
 LinkImage.propTypes = {
-	addLink: PropTypes.func.isRequired
+	addLink: PropTypes.func.isRequired,
+	deleteLink: PropTypes.func.isRequired,
+	deletePhoto: PropTypes.func.isRequired,
+	history: PropTypes.object,
+	href: PropTypes.string,
+	id: PropTypes.number,
+	location: PropTypes.object,
+	match: PropTypes.object,
+	photographer: PropTypes.string,
+	photographer_url: PropTypes.string,
+	photos: PropTypes.array,
+	url: PropTypes.string,
+	user: PropTypes.object
 };
 
 const mapStateToProps = state => ({

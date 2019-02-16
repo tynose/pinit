@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { withFormik, Form, Field } from 'formik';
 import Icon from '../../components/Icon';
 import styled from 'styled-components';
@@ -58,9 +59,8 @@ const FormikSearchBar = withFormik({
 			search: search || ''
 		};
 	},
-	handleSubmit(values, { props, resetForm, setSubmitting }) {
+	handleSubmit(values, { props, setSubmitting }) {
 		props.fetchPhotos(url(values.search));
-		resetForm();
 		setSubmitting(false);
 	}
 })(SearchBar);
@@ -71,6 +71,10 @@ const mapDispatchToProps = dispatch => {
 			dispatch(fetchPhotos(url(value)));
 		}
 	};
+};
+
+FormikSearchBar.propTypes = {
+	fetchPhotos: PropTypes.func.isRequired
 };
 
 export default connect(

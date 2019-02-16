@@ -5,7 +5,8 @@
 	"main": "server",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"start": "node server",
+		"start": "node api",
+		"heroku-postbuild": "cd client && npm install && npm run build",
 		"dev": "nodemon server"
 	},
 	"repository": {
@@ -34,5 +35,9 @@
 		"pg-hstore": "^2.3.2",
 		"sequelize": "^4.42.0",
 		"shortid": "^2.2.14"
+	},
+	"engines": {
+		"node": "v11.4.0",
+		"npm": "6.4.1"
 	}
 }

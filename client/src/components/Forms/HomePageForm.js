@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Form } from 'formik';
 import styled from 'styled-components';
 import Icon from '../Icon';
@@ -46,5 +47,9 @@ const HomePageForm = ({ children, label, isSubmitting }) => (
 		<OauthButton icon={'github'} />
 	</StyledForm>
 );
+
+HomePageForm.propTypes = {
+	label: PropTypes.string.isRequired
+};
 
 export default HomePageForm;

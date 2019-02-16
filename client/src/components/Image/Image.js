@@ -1,6 +1,5 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
-import Loader from '../Loader';
 
 const fadeIn = keyframes`
   from { opacity: 0; }
@@ -24,4 +23,4 @@ const Image = ({ src, alt, className, ...others }) => (
 	<Img className={className} src={src} alt={alt} {...others} />
 );
 
-export default Loader(Image);
+export default Image;

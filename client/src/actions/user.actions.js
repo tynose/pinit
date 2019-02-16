@@ -54,8 +54,6 @@ export const fetchUserPhotos = (id, limit) => dispatch => {
 };
 
 export const deletePhoto = (id, photos) => dispatch => {
-	console.log({ photos, id });
-
 	dispatch({
 		type: DELETE_PHOTO,
 		payload: photos.filter(photo => photo.id !== id)

@@ -1,8 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Icon from '../Icon';
 import styled from 'styled-components';
-import { connect } from 'react-redux';
-import { isLoggedIn } from '../../actions/login.actions';
 
 const StyledButton = styled.a`
 	display: flex;
@@ -25,7 +24,7 @@ const Auth = styled.div`
 	margin: 0 auto 0 34px;
 `;
 
-const OauthButton = ({ icon, className, isLoggedIn }) => (
+const OauthButton = ({ icon, className }) => (
 	<StyledButton
 		href={`/auth/${icon}`}
 		icon={icon}
@@ -39,12 +38,7 @@ const OauthButton = ({ icon, className, isLoggedIn }) => (
 	</StyledButton>
 );
 
-const mapDispatchToProps = dispatch => {
-	return {
-		isLoggedIn: () => {
-			dispatch(isLoggedIn());
-		}
-	};
+OauthButton.propTypes = {
+	icon: PropTypes.string.isRequired
 };
-
-export default connect(mapDispatchToProps)(OauthButton);
+export default OauthButton;

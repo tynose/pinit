@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchPhotos } from '../../actions/homePage.actions';
 import { fetchUser } from '../../actions/user.actions';
-import NavigationBar from '../NavigationBar';
+import NavigationBar from '../../components/NavigationBar';
 import { url } from '../../utils/constants/api';
 import LinkImage from '../LinkImage';
 
@@ -36,6 +36,7 @@ class LandingPage extends Component {
 
 	render() {
 		const { photos } = this.props;
+
 		return (
 			<Container
 				onScroll={this.handleScroll}
@@ -53,7 +54,19 @@ class LandingPage extends Component {
 }
 
 LandingPage.propTypes = {
-	fetchPhotos: PropTypes.func.isRequired
+	fetchPhotos: PropTypes.func.isRequired,
+	fetchUser: PropTypes.func.isRequired,
+	photos: PropTypes.arrayOf(
+		PropTypes.shape({
+			height: PropTypes.number,
+			width: PropTypes.number,
+			id: PropTypes.number.isRequired,
+			photographer: PropTypes.string,
+			photographer_url: PropTypes.string,
+			src: PropTypes.object,
+			url: PropTypes.string
+		})
+	)
 };
 
 const mapStateToProps = state => ({

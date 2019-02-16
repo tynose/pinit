@@ -1,8 +1,6 @@
 import { ADD_LINK, DELETE_LINK } from './types';
 
 export const addLink = data => dispatch => {
-	console.log(data);
-
 	fetch('/link/add', {
 		method: 'POST',
 		headers: {

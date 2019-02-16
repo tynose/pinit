@@ -46,7 +46,9 @@ class Home extends Component {
 }
 
 Home.propTypes = {
-	homeToggle: PropTypes.func.isRequired
+	homeToggle: PropTypes.func.isRequired,
+	isLoggedIn: PropTypes.bool,
+	login: PropTypes.bool
 };
 
 const mapStateToProps = state => ({

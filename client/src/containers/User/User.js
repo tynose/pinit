@@ -7,7 +7,7 @@ import {
 	fetchUserId,
 	fetchUserPhotos
 } from '../../actions/user.actions';
-import NavigationBar from '../NavigationBar';
+import NavigationBar from '../../components/NavigationBar';
 import { withRouter } from 'react-router-dom';
 import LinkImage from '../LinkImage';
 import { flexCenter } from '../../utils/styles/mixin';
@@ -22,9 +22,11 @@ const Container = styled.div`
 	justify-content: center;
 `;
 
-const Profile = styled.div`
+const Wrapper = styled.div`
 	width: 100%;
 	height: 200px;
+	padding: 100px;
+	text-align: center;
 	flex-direction: column;
 	justify-content: space-evenly;
 	${flexCenter};
@@ -34,21 +36,8 @@ class User extends Component {
 	async componentDidMount() {
 		await this.props.fetchUser();
 		this.props.fetchUserId(this.props.match.params.id);
-		this.props.fetchUserPhotos(this.props.match.params.id, 10);
+		this.props.fetchUserPhotos(this.props.match.params.id, 1);
 	}
-
-	// componentDidUpdate(prevProps) {
-	// 	console.log(this.props.photos.length);
-	// 	console.log(prevProps.photos.length);
-
-	// 	if (this.props.photos.length !== prevProps.photos.length) {
-	// 		this.props.fetchUserPhotos(
-	// 			this.props.match.params.id,
-	// 			this.props.photos.length - 1
-	// 		);
-	// 		console.log('different');
-	// 	}
-	// }
 
 	handleScroll = () => {
 		if (
@@ -73,17 +62,44 @@ class User extends Component {
 					this.isScroll = isScroll;
 				}}>
 				<NavigationBar />
-				<Profile>
+				<Wrapper>
 					<h1>{profile.name}</h1>
 					<p>photos i've linked to</p>
-				</Profile>
-				{photos && photos.map(image => <LinkImage key={image.id} {...image} />)}
+				</Wrapper>
+				{photos.length > 0 ? (
+					photos.map(image => <LinkImage key={image.id} {...image} />)
+				) : (
+					<Wrapper>
+						<h1>it looks like you have no linked images</h1>
+					</Wrapper>
+				)}
 			</Container>
 		);
 	}
 }
 
-User.propTypes = {};
+User.propTypes = {
+	fetchUser: PropTypes.func.isRequired,
+	fetchUserId: PropTypes.func.isRequired,
+	fetchUserPhotos: PropTypes.func.isRequired,
+	history: PropTypes.object,
+	location: PropTypes.object,
+	match: PropTypes.object,
+	profile: PropTypes.shape({
+		email: PropTypes.string,
+		name: PropTypes.string,
+		id: PropTypes.number
+	}),
+	photos: PropTypes.arrayOf(
+		PropTypes.shape({
+			id: PropTypes.number,
+			user_id: PropTypes.number,
+			photo_id: PropTypes.string,
+			href: PropTypes.string,
+			url: PropTypes.string
+		})
+	)
+};
 
 const mapStatetoProps = state => ({
 	profile: state.user.profile,
