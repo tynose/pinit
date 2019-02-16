@@ -63,7 +63,6 @@ db.authenticate()
 // app listening on specified PORT
 
 app.listen(PORT, err => {
-	console.log(process.env.DATABASE_URL);
 	if (err) {
 		console.log(`Error: ${err}`);
 	}
