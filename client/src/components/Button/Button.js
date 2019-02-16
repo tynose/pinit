@@ -20,7 +20,7 @@ const StyledButton = styled.button`
 		css`
 			position: absolute;
 			top: 30px;
-			right: 50px;
+			right: 10px;
 			width: 120px;
 			padding: 10px;
 		`}
