@@ -1,4 +1,4 @@
-# Tread Code Challenge
+# Pinit
 
 ### Hosted App
 
