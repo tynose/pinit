@@ -4158,11 +4158,6 @@ form-data@~2.3.2:
     combined-stream "1.0.6"
     mime-types "^2.1.12"
 
-form-urlencoded@1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/form-urlencoded/-/form-urlencoded-1.2.0.tgz#16ce2cafa76d2e48b9e513ab723228aea5993396"
-  integrity sha1-Fs4sr6dtLki55ROrcjIorqWZM5Y=
-
 formik@^1.4.3:
   version "1.4.3"
   resolved "https://registry.yarnpkg.com/formik/-/formik-1.4.3.tgz#a3bece72f545981f8fc825c21d5292d9aac524d2"
@@ -6119,11 +6114,6 @@ lodash.debounce@^4.0.8:
   version "4.0.8"
   resolved "https://registry.yarnpkg.com/lodash.debounce/-/lodash.debounce-4.0.8.tgz#82d79bff30a67c4005ffd5e2515300ad9ca4d7af"
   integrity sha1-gteb/zCmfEAF/9XiUVMArZyk168=
-
-lodash.get@4.4.2:
-  version "4.4.2"
-  resolved "https://registry.yarnpkg.com/lodash.get/-/lodash.get-4.4.2.tgz#2d177f652fa31e939b4438d5341499dfa3825e99"
-  integrity sha1-LRd/ZS+jHpObRDjVNBSZ36OCXpk=
 
 lodash.memoize@^4.1.2:
   version "4.1.2"
@@ -8118,11 +8108,6 @@ querystringify@^2.0.0:
   resolved "https://registry.yarnpkg.com/querystringify/-/querystringify-2.1.0.tgz#7ded8dfbf7879dcc60d0a644ac6754b283ad17ef"
   integrity sha512-sluvZZ1YiTLD5jsqZcDmFyV2EwToyXZBfpoVOmktMmW+VEnhgakFHnasVph65fOjGPTWN0Nw3+XQaSeMayr0kg==
 
-querystringify@~1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/querystringify/-/querystringify-1.0.0.tgz#6286242112c5b712fa654e526652bf6a13ff05cb"
-  integrity sha1-YoYkIRLFtxL6ZU5SZlK/ahP/Bcs=
-
 raf@3.4.0:
   version "3.4.0"
   resolved "https://registry.yarnpkg.com/raf/-/raf-3.4.0.tgz#a28876881b4bc2ca9117d4138163ddb80f781575"
@@ -8599,7 +8584,7 @@ require-uncached@^1.0.3:
     caller-path "^0.1.0"
     resolve-from "^1.0.0"
 
-requires-port@^1.0.0, requires-port@~1.0.0:
+requires-port@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/requires-port/-/requires-port-1.0.0.tgz#925d2601d39ac485e091cf0da5c6e694dc3dcaff"
   integrity sha1-kl0mAdOaxIXgkc8NpcbmlNw9yv8=
@@ -9699,9 +9684,9 @@ typedarray@^0.0.6:
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
 
 ua-parser-js@^0.7.18:
-  version "0.7.19"
-  resolved "https://registry.yarnpkg.com/ua-parser-js/-/ua-parser-js-0.7.19.tgz#94151be4c0a7fb1d001af7022fdaca4642659e4b"
-  integrity sha512-T3PVJ6uz8i0HzPxOF9SWzWAlfN/DavlpQqepn22xgve/5QecC+XMCAtmUNnY7C9StehaV6exjUCI801lOI7QlQ==
+  version "0.7.28"
+  resolved "https://registry.yarnpkg.com/ua-parser-js/-/ua-parser-js-0.7.28.tgz#8ba04e653f35ce210239c64661685bf9121dec31"
+  integrity sha512-6Gurc1n//gjp9eQNXjD9O3M/sMwVtN5S8Lv9bvOYBfKfDNiIIhqiyi01vMBO45u4zkDE420w/e0se7Vs+sIg+g==
 
 uglify-es@^3.3.4:
   version "3.3.9"
@@ -9813,16 +9798,6 @@ unset-value@^1.0.0:
     has-value "^0.3.1"
     isobject "^3.0.0"
 
-unsplash-js@^4.8.0:
-  version "4.8.0"
-  resolved "https://registry.yarnpkg.com/unsplash-js/-/unsplash-js-4.8.0.tgz#8a5a8ccbdf39410ffb9fdd5f04ed2651ea644349"
-  integrity sha1-ilqMy985QQ/7n91fBO0mUepkQ0k=
-  dependencies:
-    form-urlencoded "1.2.0"
-    lodash.get "4.4.2"
-    querystring "0.2.0"
-    url-parse "1.2.0"
-
 upath@^1.0.5:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/upath/-/upath-1.1.0.tgz#35256597e46a581db4793d0ce47fa9aebfc9fabd"
@@ -9853,14 +9828,6 @@ url-loader@1.1.1:
     loader-utils "^1.1.0"
     mime "^2.0.3"
     schema-utils "^1.0.0"
-
-url-parse@1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/url-parse/-/url-parse-1.2.0.tgz#3a19e8aaa6d023ddd27dcc44cb4fc8f7fec23986"
-  integrity sha512-DT1XbYAfmQP65M/mE6OALxmXzZ/z1+e5zk2TcSKe/KiYbNGZxgtttzC0mR/sjopbpOXcbniq7eIKmocJnUWlEw==
-  dependencies:
-    querystringify "~1.0.0"
-    requires-port "~1.0.0"
 
 url-parse@^1.1.8, url-parse@^1.4.3:
   version "1.4.3"
